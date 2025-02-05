@@ -5,7 +5,7 @@ const resultRouter = express.Router();
 
 resultRouter.post("/", async (request: express.Request, response: express.Response) => {
     let data = request.body;
-    let result = CheckResult(data.data)
+    let result = await CheckResult(data.data)
     response.send(result);
 })
 

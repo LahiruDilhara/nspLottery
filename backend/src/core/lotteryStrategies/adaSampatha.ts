@@ -1,6 +1,7 @@
 import ILotteryStrategy from "../../interfaces/ILotteryStrategy";
 
 export default class AdaSampathaStrategy extends ILotteryStrategy {
+    
     toString(): string {
         return "Ada Sampatha";
     }

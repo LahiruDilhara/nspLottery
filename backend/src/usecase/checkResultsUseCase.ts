@@ -1,16 +1,19 @@
 import LotteryRegex from "../core/constants/lotteryRegex";
+import Tokenizer from "../core/utils/tokenizer";
 import ILotteryStrategy from "../interfaces/ILotteryStrategy";
 
-export default function CheckResult(lotteryDataString: string): string {
+export default async function CheckResult(lotteryDataString: string): Promise<string> {
     let strategy = selectTheStrategy(lotteryDataString);
     if (strategy == null) {
-        return "null"
+        return "Unrecognized lottery type"
     }
-    return strategy.toString();
+    let lotteryStringToken = Tokenizer.tokenLottery(lotteryDataString);
+
+    return (await strategy.checkResult(lotteryStringToken)).toString();
+    // return strategy.toString();
 }
 
 function selectTheStrategy(lotteryDataString: string): ILotteryStrategy | null {
-    console.log(lotteryDataString.length);
     for (const lotteryRegex of LotteryRegex) {
 
         // reset the regex last index to 0. because it is save its previous state which means the index where it was left. so this might cause problems. so that's why manually remove this state.
