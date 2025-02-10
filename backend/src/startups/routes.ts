@@ -2,8 +2,8 @@ import express, { Application } from 'express';
 import helmet from 'helmet';
 import cors from "cors";
 import morgan from 'morgan';
-import testRouter from '../routes/test';
-import resultRouter from '../routes/result';
+import testRouter from '../presentation/dto/routes/test';
+import resultRouter from '../presentation/dto/routes/result';
 
 
 export default function configRoutes(app: Application) {
