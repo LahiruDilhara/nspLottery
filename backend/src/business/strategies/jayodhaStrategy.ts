@@ -8,7 +8,7 @@ export default class JayodhaStrategy extends ILotteryStrategy {
 
         lottery.name = "Jayoda";
         lottery.drawNo = tokens[1];
-        lottery.date = this.formatDateMethod1(tokens[2]);
+        lottery.date = this.formatDate(tokens[2]);
         lottery.barCode = tokens[3];
         lottery.numbers = tokens.slice(4, 8);
         lottery.symbole = tokens[8];

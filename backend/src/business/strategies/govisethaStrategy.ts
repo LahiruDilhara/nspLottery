@@ -9,7 +9,7 @@ export default class GovisethaStrategy extends ILotteryStrategy {
 
         lottery.name = "Gove Setha";
         lottery.drawNo = tokens[2];
-        lottery.date = this.formatDateMethod1(tokens[3]);
+        lottery.date = this.formatDate(tokens[3]);
         lottery.barCode = tokens[4];
         lottery.symbole = tokens[5];
         lottery.numbers = tokens.slice(6, 10)

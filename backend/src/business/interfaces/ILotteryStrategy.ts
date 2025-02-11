@@ -9,7 +9,7 @@ export default abstract class ILotteryStrategy {
         return new LotteryEnitity();
     }
 
-    formatDateMethod1(dateString: string): Date {
+    formatDate(dateString: string): Date {
         // convert the & signs in the date string to - signs
         const formattedDate = dateString.replace(/&/g, "-");
         return new Date(formattedDate);
