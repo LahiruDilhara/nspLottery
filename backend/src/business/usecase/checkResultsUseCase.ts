@@ -3,7 +3,7 @@ import Tokenizer from "../../core/utils/tokenizer";
 import ILotteryStrategy from "../interfaces/ILotteryStrategy";
 import LotteryStrategyFactory from "../strategies/lotteryStrategyFactory";
 
-export default async function CheckResultFromLotteryString(lotteryDataString: string): Promise<string> {
+export default async function CheckResultFromLotteryString(lotteryDataString: string): Promise<object> {
     // get the appropriate lottery strategy
     let strategy = selectTheStrategy(lotteryDataString);
 
@@ -16,7 +16,7 @@ export default async function CheckResultFromLotteryString(lotteryDataString: st
 
     // return (await strategy.checkResult(lotteryStringToken)).toString();
     // return .toString();
-    return JSON.stringify(strategy.parseFromQRStringTokens(lotteryStringToken));
+    return strategy.parseFromQRStringTokens(lotteryStringToken);
 }
 
 function selectTheStrategy(lotteryDataString: string): ILotteryStrategy | null {
