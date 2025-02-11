@@ -2,8 +2,7 @@ import express, { Application } from 'express';
 import helmet from 'helmet';
 import cors from "cors";
 import morgan from 'morgan';
-import testRouter from '../presentation/dto/routes/test';
-import resultRouter from '../presentation/dto/routes/result';
+import resultRouter from '../presentation/routes/result';
 
 
 export default function configRoutes(app: Application) {
@@ -13,6 +12,5 @@ export default function configRoutes(app: Application) {
     app.use(morgan("combined"));
 
     // config the routes
-    app.use("/api/v1/test", testRouter);
     app.use("/api/v1/result", resultRouter);
 }
