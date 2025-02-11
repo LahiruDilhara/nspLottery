@@ -6,6 +6,7 @@ import DhanaNidhanayaStrategy from "./dhanaNidhanayaStrategy";
 import GovisethaStrategy from "./govisethaStrategy";
 import HadahanaStrategy from "./hadahanaStrategy";
 import JayaStrategy from "./jayaStrategy";
+import JayodhaStrategy from "./jayodhaStrategy";
 import KaprukaStrategy from "./kaprukaStrategy";
 import LagnaWasanaStrategy from "./lagnaWasanaStrategy";
 import MahajanaStrategy from "./mahajanaStrategy";
@@ -25,7 +26,7 @@ export default class LotteryStrategyFactory {
             case LotteryEnum.HADAHANA:
                 return new HadahanaStrategy();
             case LotteryEnum.JAYODHA:
-                return new JayaStrategy();
+                return new JayodhaStrategy();
             case LotteryEnum.LAGNA_WASANA:
                 return new LagnaWasanaStrategy();
             case LotteryEnum.MAHAJANA:

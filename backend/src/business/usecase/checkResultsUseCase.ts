@@ -17,6 +17,7 @@ export default async function CheckResultFromLotteryString(lotteryDataString: st
     // return (await strategy.checkResult(lotteryStringToken)).toString();
     // return .toString();
     return strategy.parseFromQRStringTokens(lotteryStringToken);
+    // return { name: strategy.toString() };
 }
 
 function selectTheStrategy(lotteryDataString: string): ILotteryStrategy | null {
