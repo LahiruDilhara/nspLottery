@@ -12,7 +12,7 @@ export default class GovisethaStrategy extends ILotteryStrategy {
         lottery.date = this.formatDate(tokens[3]);
         lottery.barCode = tokens[4];
         lottery.symbole = tokens[5];
-        lottery.numbers = this.parseNumbers(tokens.slice(6, 10))
+        lottery.numbers = tokens.slice(6, 10)
         lottery.specialSymboles = tokens.slice(10);
 
         return lottery;
@@ -31,13 +31,5 @@ export default class GovisethaStrategy extends ILotteryStrategy {
         // convert the & signs in the date string to - signs
         const formattedDate = dateString.replace(/&/g, "-");
         return new Date(formattedDate);
-    }
-
-    private parseNumbers(numberTokens: string[]): number[] {
-        let numbers: number[] = [];
-        numberTokens.forEach((value, index) => {
-            numbers.push(parseInt(value));
-        })
-        return numbers;
     }
 }
