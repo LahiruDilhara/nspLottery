@@ -3,6 +3,7 @@ import c from "config";
 import configRoutes from "./startups/routes";
 import checkConfigurations from "./startups/config";
 import configDatabase from "./startups/database";
+import bindNetwork from "./startups/bindApp";
 
 async function main() {
     // create the express application
@@ -18,10 +19,7 @@ async function main() {
     configRoutes(app);
 
     // configure the server and the port number
-    const PORT = 4080;
-    app.listen(PORT, "0.0.0.0", () => {
-        console.log(`The application listen on port ${PORT}`);
-    });
+    bindNetwork(app);
 }
 
 main();
