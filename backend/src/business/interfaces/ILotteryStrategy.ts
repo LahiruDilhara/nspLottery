@@ -5,9 +5,7 @@ export default abstract class ILotteryStrategy {
 
     abstract toString(): string;
 
-    parseFromQRStringTokens(tokens: string[]): LotteryEnitity {
-        return new LotteryEnitity();
-    }
+    abstract parseFromQRStringTokens(tokens: string[]): LotteryEnitity;
 
     formatDate(dateString: string): Date {
         // convert the & signs in the date string to - signs
