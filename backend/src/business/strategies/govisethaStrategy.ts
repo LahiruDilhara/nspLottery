@@ -17,6 +17,7 @@ export default class GovisethaStrategy extends ILotteryStrategy {
 
         return lottery;
     }
+
     toString(): string {
         return "govisetha";
     }
