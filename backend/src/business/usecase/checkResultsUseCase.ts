@@ -14,7 +14,9 @@ export default async function CheckResultFromLotteryString(lotteryDataString: st
     // tokanize the lottery data string
     let lotteryStringToken = Tokenizer.tokenLottery(lotteryDataString);
 
-    return (await strategy.checkResult(lotteryStringToken)).toString();
+    // return (await strategy.checkResult(lotteryStringToken)).toString();
+    // return .toString();
+    return JSON.stringify(strategy.parseFromQRStringTokens(lotteryStringToken));
 }
 
 function selectTheStrategy(lotteryDataString: string): ILotteryStrategy | null {
