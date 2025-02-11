@@ -9,7 +9,7 @@ export default class GovisethaStrategy extends ILotteryStrategy {
 
         lottery.name = "Gove Setha";
         lottery.drawNo = tokens[2];
-        lottery.date = this.formatDate(tokens[3]);
+        lottery.date = this.formatDateMethod1(tokens[3]);
         lottery.barCode = tokens[4];
         lottery.symbole = tokens[5];
         lottery.numbers = tokens.slice(6, 10)
@@ -25,11 +25,5 @@ export default class GovisethaStrategy extends ILotteryStrategy {
     async checkResult(tokens: string[]): Promise<number> {
         console.log(tokens);
         return 10;
-    }
-
-    private formatDate(dateString: string): Date {
-        // convert the & signs in the date string to - signs
-        const formattedDate = dateString.replace(/&/g, "-");
-        return new Date(formattedDate);
     }
 }

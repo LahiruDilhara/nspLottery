@@ -8,7 +8,7 @@ export default class AdaKotipathiStrategy extends ILotteryStrategy {
 
         lottery.name = "Ada Kotipathi";
         lottery.drawNo = tokens[2];
-        lottery.date = this.formatDate(tokens[3]);
+        lottery.date = this.formatDateMethod1(tokens[3]);
         lottery.barCode = tokens[4];
         lottery.numbers = tokens.slice(5, 9);
         lottery.symbole = tokens[9];
@@ -25,12 +25,6 @@ export default class AdaKotipathiStrategy extends ILotteryStrategy {
 
     toString(): string {
         return "Ada Kotipathi";
-    }
-
-    private formatDate(dateString: string): Date {
-        // convert the & signs in the date string to - signs
-        const formattedDate = dateString.replace(/&/g, "-");
-        return new Date(formattedDate);
     }
 
 }

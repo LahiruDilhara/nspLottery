@@ -12,7 +12,7 @@ export default class DhanaNidhanayaStrategy extends ILotteryStrategy {
         lottery.specialSymboles = tokens.slice(8, tokens.length - 3);
         lottery.barCode = tokens[tokens.length - 2];
         lottery.specialSymboles.push(tokens[tokens.length - 1]);
-        lottery.date = this.formatDate(tokens[tokens.length - 3]);
+        lottery.date = this.formatDateMethod1(tokens[tokens.length - 3]);
         return lottery;
     }
     toString(): string {
@@ -22,12 +22,6 @@ export default class DhanaNidhanayaStrategy extends ILotteryStrategy {
     async checkResult(tokens: string[]): Promise<number> {
         console.log(tokens);
         return 10;
-    }
-
-    private formatDate(dateString: string): Date {
-        // convert the & signs in the date string to - signs
-        const formattedDate = dateString.replace(/&/g, "-");
-        return new Date(formattedDate);
     }
 
 }

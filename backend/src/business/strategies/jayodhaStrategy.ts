@@ -8,7 +8,7 @@ export default class JayodhaStrategy extends ILotteryStrategy {
 
         lottery.name = "Jayoda";
         lottery.drawNo = tokens[1];
-        lottery.date = this.formatDate(tokens[2]);
+        lottery.date = this.formatDateMethod1(tokens[2]);
         lottery.barCode = tokens[3];
         lottery.numbers = tokens.slice(4, 8);
         lottery.symbole = tokens[8];
@@ -23,11 +23,5 @@ export default class JayodhaStrategy extends ILotteryStrategy {
     async checkResult(tokens: string[]): Promise<number> {
         console.log(tokens);
         return 10;
-    }
-
-    private formatDate(dateString: string): Date {
-        // convert the & signs in the date string to - signs
-        const formattedDate = dateString.replace(/&/g, "-");
-        return new Date(formattedDate);
     }
 }
