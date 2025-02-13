@@ -45,3 +45,13 @@ function selectTheStrategy(lotteryDataString: string): ILotteryStrategy | null {
  * then combine the results into single int
  * then return it.
  */
+
+/**
+ * identify the date
+ * convert date into standard date
+ * check for the lotteryData.regexSceme for that date
+ * loop over all the regex and finds the regex which match with the specified lottery
+ * based on the lottery type get the lottery strategy
+ * pass the lotteryData.lotterySceme, lottery tokens to get the standard lotteryEntity
+ * pass the lottery entity to the checkResult method of the strategy.
+ */
