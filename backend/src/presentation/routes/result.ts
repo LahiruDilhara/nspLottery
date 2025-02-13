@@ -1,13 +1,13 @@
 import express from "express";
-import CheckResultFromLotteryString from "../../business/usecase/checkResultsUseCase";
+import CheckResultFromLotteryString, { CheckResultFromQR } from "../../business/usecase/checkResultsUseCase";
 import ErrorDto from "../dto/error/errorDto";
 
 const resultRouter = express.Router();
 
-resultRouter.post("/", async (request: express.Request, response: express.Response) => {
+resultRouter.post("/qr", async (request: express.Request, response: express.Response) => {
     let data = request.body;
     try {
-        let result = await CheckResultFromLotteryString(data.data)
+        let result = await CheckResultFromQR(data.data);
         response.send(result);
     }
     catch (e: unknown) {

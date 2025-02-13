@@ -1,4 +1,5 @@
 import LotteryRegex from "../../core/constants/lotteryRegex";
+import LotteryParser from "../../core/utils/lotteryParser";
 import Tokenizer from "../../core/utils/tokenizer";
 import ILotteryStrategy from "../interfaces/ILotteryStrategy";
 import LotteryStrategyFactory from "../strategies/lotteryStrategyFactory";
@@ -18,6 +19,17 @@ export default async function CheckResultFromLotteryString(lotteryDataString: st
     // return .toString();
     return strategy.parseFromQRStringTokens(lotteryStringToken);
     // return { name: strategy.toString() };
+}
+
+export async function CheckResultFromQR(QRDataString: string): Promise<object> {
+
+    // get the date from the lottery qr
+    let date: Date | null = LotteryParser.parseDate(QRDataString);
+    if (date == null) throw Error("The QR hasn't valid date");
+
+    console.log(date);
+    return Object();
+
 }
 
 function selectTheStrategy(lotteryDataString: string): ILotteryStrategy | null {

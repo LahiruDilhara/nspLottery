@@ -17,16 +17,19 @@ export default class LotteryParser {
         else if (dateRegex2.test(dataString)) {
             let date = dataString.match(dateRegex2);
             if (date == null) return null;
-            [day, month, year] = date[0].split(".");
+            [year, month, day] = date[0].split("&");
         }
         else if (dateRegex4.test(dataString)) {
             let date = dataString.match(dateRegex4);
             if (date == null) return null;
-            [day, month, year] = date[0].split(".");
+            [year, month, day] = date[0].split(".");
         }
         else {
             return null;
         }
+        console.log(year)
+        console.log(month)
+        console.log(day)
         let formattedDate = `${year}-${month}-${day}`;
         return new Date(formattedDate);
     }
