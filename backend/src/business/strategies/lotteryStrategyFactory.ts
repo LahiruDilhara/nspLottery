@@ -1,4 +1,3 @@
-import LotteryEnum from "../../core/enums/lotteryEnum";
 import ILotteryStrategy from "../interfaces/ILotteryStrategy";
 import AdaKotipathiStrategy from "./adaKotipathiStrategy";
 import AdaSampathaStrategy from "./adaSampathaStrategy";
@@ -17,37 +16,37 @@ import superBallStrategy from "./superBallStrategy";
 import SupiriDhanaSampathaStrategy from "./supiriDhanaSampathaStrategy";
 
 export default class LotteryStrategyFactory {
-    static getLotteryStrategy(lotteryType: LotteryEnum): ILotteryStrategy | null {
-        switch (lotteryType) {
-            case LotteryEnum.ADA_KOTIPATHI:
+    static getLotteryStrategy(lotteryName: string): ILotteryStrategy | null {
+        switch (lotteryName) {
+            case "AdaKotipathi":
                 return new AdaKotipathiStrategy();
-            case LotteryEnum.DHANA_NIDHANAYA:
+            case "DhanaNidhanaya":
                 return new DhanaNidhanayaStrategy();
-            case LotteryEnum.HADAHANA:
+            case "Hadahana":
                 return new HadahanaStrategy();
-            case LotteryEnum.JAYODHA:
+            case "Jayodha":
                 return new JayodhaStrategy();
-            case LotteryEnum.LAGNA_WASANA:
+            case "LagnaWasana":
                 return new LagnaWasanaStrategy();
-            case LotteryEnum.MAHAJANA:
+            case "Mahajana":
                 return new MahajanaStrategy();
-            case LotteryEnum.SASIRI:
+            case "Sasiri":
                 return new SasiriStrategy();
-            case LotteryEnum.SUPER_BALL:
+            case "SuperBall":
                 return new superBallStrategy();
-            case LotteryEnum.ADA_SAMPATHA:
+            case "AdaSampatha":
                 return new AdaSampathaStrategy();
-            case LotteryEnum.GOVISETHA:
+            case "Govisetha":
                 return new GovisethaStrategy();
-            case LotteryEnum.JAYA:
+            case "Jaya":
                 return new JayaStrategy();
-            case LotteryEnum.KAPRUKA:
+            case "Kapruka":
                 return new KaprukaStrategy();
-            case LotteryEnum.MEGA_POWER:
+            case "MegaPower":
                 return new MegaPowerStrategy();
-            case LotteryEnum.SHANIDA:
+            case "Shanida":
                 return new ShanidaStrategy();
-            case LotteryEnum.SUPIRI_DHANA_SAMPATHA:
+            case "SupiriDhanaSampatha":
                 return new SupiriDhanaSampathaStrategy();
             default:
                 return null;
