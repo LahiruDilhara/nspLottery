@@ -1,7 +1,9 @@
 import LotteryRegex from "../../core/constants/lotteryRegex";
+import LotteryParser from "../../core/utils/lotteryParser";
 import Tokenizer from "../../core/utils/tokenizer";
 import ILotteryStrategy from "../interfaces/ILotteryStrategy";
 import LotteryStrategyFactory from "../strategies/lotteryStrategyFactory";
+import IResultRepository from '../interfaces/IResultRepository';
 
 export default async function CheckResultFromLotteryString(lotteryDataString: string): Promise<object> {
     // get the appropriate lottery strategy
@@ -20,6 +22,33 @@ export default async function CheckResultFromLotteryString(lotteryDataString: st
     // return { name: strategy.toString() };
 }
 
+export async function CheckResultFromQR(QRDataString: string, resultRepository: IResultRepository): Promise<object> {
+
+    // get the date from the lottery qr
+    let date: Date | null = LotteryParser.parseDate(QRDataString);
+    if (date == null) throw Error("The QR hasn't valid date");
+
+    // get the scheme list from the repository for the given date
+    let scheme = resultRepository.getLotteryIdentifierScemeList(date);
+    if (scheme == null) throw Error("There is no scheme defined for this date");
+
+    // identify the lottery from the qr string
+    let lotteryName: string | null = null;
+    scheme.forEach((lotteryScheme) => {
+        if (lotteryScheme.regex.test(QRDataString)) {
+            lotteryName = lotteryScheme.name;
+        }
+    });
+    if (lotteryName == null) throw Error("The Lottery is not found for the given QR");
+
+    // identify the appropriate lottery strategy to parse the lottery.
+    let lotteryStrategy: ILotteryStrategy | null = LotteryStrategyFactory.getLotteryStrategy(lotteryName);
+    if (lotteryStrategy == null) throw Error("There is no strategy define for this lottery type");
+
+    return Object();
+
+}
+
 function selectTheStrategy(lotteryDataString: string): ILotteryStrategy | null {
     for (let [lotteryType, regex] of LotteryRegex) {
 
@@ -27,7 +56,7 @@ function selectTheStrategy(lotteryDataString: string): ILotteryStrategy | null {
         regex.lastIndex = 0;
 
         if (regex.test(lotteryDataString)) {
-            return LotteryStrategyFactory.getLotteryStrategy(lotteryType);
+            // return LotteryStrategyFactory.getLotteryStrategy(lotteryType);
         }
     }
     return null;
