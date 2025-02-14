@@ -27,9 +27,6 @@ export default class LotteryParser {
         else {
             return null;
         }
-        console.log(year)
-        console.log(month)
-        console.log(day)
         let formattedDate = `${year}-${month}-${day}`;
         return new Date(formattedDate);
     }
