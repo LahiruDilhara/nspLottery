@@ -14,7 +14,7 @@ export default async function CheckResultFromLotteryString(lotteryDataString: st
     }
 
     // tokanize the lottery data string
-    let lotteryStringToken = Tokenizer.tokenLottery(lotteryDataString);
+    let lotteryStringToken = Tokenizer.tokenizeStringBySpaces(lotteryDataString);
 
     // return (await strategy.checkResult(lotteryStringToken)).toString();
     // return .toString();
@@ -44,6 +44,14 @@ export async function CheckResultFromQR(QRDataString: string, resultRepository: 
     // identify the appropriate lottery strategy to parse the lottery.
     let lotteryStrategy: ILotteryStrategy | null = LotteryStrategyFactory.getLotteryStrategy(lotteryName);
     if (lotteryStrategy == null) throw Error("There is no strategy define for this lottery type");
+
+    // tokenized the QR code by spaces
+    let qrTokens: string[] = Tokenizer.tokenizeStringBySpaces(QRDataString);
+
+    // get the result scheet for the specified date
+    let resultSheet;
+
+    // get the lottery Entity object by parsing the qr tokens through the strategy
 
     return Object();
 
