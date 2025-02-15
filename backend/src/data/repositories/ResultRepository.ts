@@ -49,7 +49,7 @@ export default class ResultRepository implements IResultRepository {
     }
 
 
-    getResultScheet(lotteryName: string, date: Date): ResultSheetEntity {
+    getResultScheet(lotteryName: string, date: Date): ResultSheetEntity | null {
         return this.adaKotipathiResultScheet;
     }
 }

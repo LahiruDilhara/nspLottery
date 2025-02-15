@@ -50,12 +50,11 @@ export async function CheckResultFromQR(QRDataString: string, resultRepository: 
 
     // get the result scheet for the specified date
     let resultSheet = resultRepository.getResultScheet(lotteryName, date);
+    if (resultSheet == null) throw Error(`There is no result sheet found for the lottery ${lotteryName} on date ${date}`);
+    if (resultSheet.qrIndexes.tokensLength != qrTokens.length) throw Error("Invalid qr token length");
 
     // get the lottery Entity object by parsing the qr tokens through the strategy
     let lotteryDataEntity = lotteryStrategy.parseQRTokens(qrTokens, resultSheet);
-
-    console.log(lotteryDataEntity);
-    console.log(lotteryDataEntity.specialSymboles)
 
     return Object();
 
@@ -85,4 +84,5 @@ function selectTheStrategy(lotteryDataString: string): ILotteryStrategy | null {
  * for special results the value is in the result sheet itself.
  * then combine the results into single int
  * then return it.
+ * the QR should only parsed and give all the informations inside it.
  */
