@@ -54,7 +54,9 @@ export async function CheckResultFromQR(QRDataString: string, resultRepository: 
     if (resultSheet.qrIndexes.tokensLength != qrTokens.length) throw Error("Invalid qr token length");
 
     // get the lottery Entity object by parsing the qr tokens through the strategy
-    let lotteryDataEntity = lotteryStrategy.parseQRTokens(qrTokens, resultSheet);
+    let lotteryDataEntity = lotteryStrategy.parseQRTokens(qrTokens, resultSheet.qrIndexes);
+    console.log(lotteryDataEntity);
+    console.log(lotteryDataEntity.specialSymboles);
 
     return Object();
 

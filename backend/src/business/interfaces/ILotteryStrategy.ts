@@ -15,7 +15,7 @@ export default abstract class ILotteryStrategy {
         return new Date(formattedDate);
     }
 
-    parseQRTokens(tokens: string[], resultSheet: ResultSheetEntity): LotteryDataEntity {
+    parseQRTokens(tokens: string[], qrIndexes: QRIndexes): LotteryDataEntity {
         return new LotteryDataEntity();
     }
 }
