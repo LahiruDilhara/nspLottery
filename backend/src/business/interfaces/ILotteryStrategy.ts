@@ -1,4 +1,6 @@
+import LotteryDataEntity from "../entities/LotteryDataEntity";
 import LotteryEnitity from "../entities/LotteryEntity";
+import ResultSheetEntity from "../entities/ResultSheetEntity";
 
 export default abstract class ILotteryStrategy {
     abstract checkResult(tokens: string[]): Promise<number>;
@@ -11,5 +13,9 @@ export default abstract class ILotteryStrategy {
         // convert the & signs in the date string to - signs
         const formattedDate = dateString.replace(/&/g, "-");
         return new Date(formattedDate);
+    }
+
+    parseQRTokens(tokens: string[], resultSheet: ResultSheetEntity): LotteryDataEntity {
+        return new LotteryDataEntity();
     }
 }

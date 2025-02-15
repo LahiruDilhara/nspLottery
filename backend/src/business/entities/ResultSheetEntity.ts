@@ -12,8 +12,8 @@ export default class ResultSheetEntity {
     results!: {
         numbers: string[];
         symboles: string[];
+        prizes: number[]
         specialSymboles: { category: string, method: string, results: string[], gift: string, description: string }[];
-        prizes: []
     };
 
 }

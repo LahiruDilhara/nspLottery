@@ -49,9 +49,13 @@ export async function CheckResultFromQR(QRDataString: string, resultRepository: 
     let qrTokens: string[] = Tokenizer.tokenizeStringBySpaces(QRDataString);
 
     // get the result scheet for the specified date
-    let resultSheet;
+    let resultSheet = resultRepository.getResultScheet(lotteryName, date);
 
     // get the lottery Entity object by parsing the qr tokens through the strategy
+    let lotteryDataEntity = lotteryStrategy.parseQRTokens(qrTokens, resultSheet);
+
+    console.log(lotteryDataEntity);
+    console.log(lotteryDataEntity.specialSymboles)
 
     return Object();
 

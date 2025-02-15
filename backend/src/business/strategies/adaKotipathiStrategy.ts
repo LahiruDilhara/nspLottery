@@ -1,4 +1,6 @@
+import LotteryDataEntity from "../entities/LotteryDataEntity";
 import LotteryEnitity from "../entities/LotteryEntity";
+import ResultSheetEntity from "../entities/ResultSheetEntity";
 import ILotteryStrategy from "../interfaces/ILotteryStrategy";
 
 export default class AdaKotipathiStrategy extends ILotteryStrategy {
@@ -27,4 +29,13 @@ export default class AdaKotipathiStrategy extends ILotteryStrategy {
         return "Ada Kotipathi";
     }
 
+    parseQRTokens(tokens: string[], resultSheet: ResultSheetEntity): LotteryDataEntity {
+        return {
+            barcode: tokens[resultSheet.qrIndexes.barCode],
+            drawNo: tokens[resultSheet.qrIndexes.drawNo],
+            numbers: resultSheet.qrIndexes.numbers.map(numberIndex => tokens[numberIndex]),
+            symboles: resultSheet.qrIndexes.symboles.map(symboleIndex => tokens[symboleIndex]),
+            specialSymboles: resultSheet.qrIndexes.specialSymboles.map((specialSymbole => ({ category: specialSymbole.category, symboles: specialSymbole.indexes.map(specialSymboleIndex => tokens[specialSymboleIndex]) })))
+        }
+    }
 }
