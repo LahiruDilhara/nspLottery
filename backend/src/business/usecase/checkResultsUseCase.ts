@@ -4,6 +4,8 @@ import Tokenizer from "../../core/utils/tokenizer";
 import ILotteryStrategy from "../interfaces/ILotteryStrategy";
 import LotteryStrategyFactory from "../strategies/lotteryStrategyFactory";
 import IResultRepository from '../interfaces/IResultRepository';
+import LotteryDataEntity from "../entities/LotteryDataEntity";
+import LotteryResultEntity from "../entities/LotteryResultEntity";
 
 export default async function CheckResultFromLotteryString(lotteryDataString: string): Promise<object> {
     // get the appropriate lottery strategy
@@ -54,9 +56,10 @@ export async function CheckResultFromQR(QRDataString: string, resultRepository: 
     if (resultSheet.qrIndexes.tokensLength != qrTokens.length) throw Error("Invalid qr token length");
 
     // get the lottery Entity object by parsing the qr tokens through the strategy
-    let lotteryDataEntity = lotteryStrategy.parseQRTokens(qrTokens, resultSheet.qrIndexes);
-    console.log(lotteryDataEntity);
-    console.log(lotteryDataEntity.specialSymboles);
+    let lotteryData: LotteryDataEntity = lotteryStrategy.parseQRTokens(qrTokens, resultSheet.qrIndexes);
+
+    // check the result using the lotteryDataEntity
+    lotteryStrategy.checkTheResult(resultSheet.results, lotteryData);
 
     return Object();
 

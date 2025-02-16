@@ -3,5 +3,5 @@ export default class LotteryDataEntity {
     symboles!: string[];
     drawNo!: string;
     barcode!: string;
-    specialSymboles!: { category: string, symboles: string[] }[];
+    specialSymboles!: { category: string, symboles: string[]}[];
 }

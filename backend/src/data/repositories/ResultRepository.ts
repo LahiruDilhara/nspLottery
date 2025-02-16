@@ -37,10 +37,20 @@ export default class ResultRepository implements IResultRepository {
         },
         results: {
             numbers: ["01", "18", "70", "75"],
-            prizes: [40, 200, 200],
+            prizes: [
+                50000000,
+                2000000,
+                200000,
+                4000,
+                2000,
+                200,
+                200,
+                40,
+                40
+            ],
             symboles: ["G"],
             specialSymboles: [
-                { category: "first", description: "regular", gift: "car", method: "oneToOne", results: ["684656"] }
+                { category: "first", description: "regular", gift: "100000", method: "OneToOne", results: ["684656"] }
             ]
         }
     };
