@@ -4,6 +4,9 @@ import Tokenizer from "../../core/utils/tokenizer";
 import ILotteryStrategy from "../interfaces/ILotteryStrategy";
 import LotteryStrategyFactory from "../strategies/lotteryStrategyFactory";
 import IResultRepository from '../interfaces/IResultRepository';
+import LotteryDataEntity from "../entities/LotteryDataEntity";
+import LotteryResultEntity from "../entities/LotteryResultEntity";
+import _ from "lodash"
 
 export default async function CheckResultFromLotteryString(lotteryDataString: string): Promise<object> {
     // get the appropriate lottery strategy
@@ -14,7 +17,7 @@ export default async function CheckResultFromLotteryString(lotteryDataString: st
     }
 
     // tokanize the lottery data string
-    let lotteryStringToken = Tokenizer.tokenLottery(lotteryDataString);
+    let lotteryStringToken = Tokenizer.tokenizeStringBySpaces(lotteryDataString);
 
     // return (await strategy.checkResult(lotteryStringToken)).toString();
     // return .toString();
@@ -22,7 +25,7 @@ export default async function CheckResultFromLotteryString(lotteryDataString: st
     // return { name: strategy.toString() };
 }
 
-export async function CheckResultFromQR(QRDataString: string, resultRepository: IResultRepository): Promise<object> {
+export async function CheckResultFromQR(QRDataString: string, resultRepository: IResultRepository): Promise<LotteryResultEntity> {
 
     // get the date from the lottery qr
     let date: Date | null = LotteryParser.parseDate(QRDataString);
@@ -45,7 +48,21 @@ export async function CheckResultFromQR(QRDataString: string, resultRepository: 
     let lotteryStrategy: ILotteryStrategy | null = LotteryStrategyFactory.getLotteryStrategy(lotteryName);
     if (lotteryStrategy == null) throw Error("There is no strategy define for this lottery type");
 
-    return Object();
+    // tokenized the QR code by spaces
+    let qrTokens: string[] = Tokenizer.tokenizeStringBySpaces(QRDataString);
+
+    // get the result scheet for the specified date
+    let resultSheet = resultRepository.getResultScheet(lotteryName, date);
+    if (resultSheet == null) throw Error(`There is no result sheet found for the lottery ${lotteryName} on date ${date}`);
+    if (resultSheet.qrIndexes.tokensLength != qrTokens.length) throw Error("Invalid qr token length");
+
+    // get the lottery Entity object by parsing the qr tokens through the strategy
+    let lotteryData: LotteryDataEntity = lotteryStrategy.parseQRTokens(qrTokens, resultSheet.qrIndexes);
+
+    // check the result using the lotteryDataEntity
+    let results: LotteryResultEntity = lotteryStrategy.checkTheResult(resultSheet.results, lotteryData);
+
+    return results;
 
 }
 
@@ -83,4 +100,5 @@ function selectTheStrategy(lotteryDataString: string): ILotteryStrategy | null {
  * based on the lottery type get the lottery strategy
  * pass the lotteryData.lotterySceme, lottery tokens to get the standard lotteryEntity
  * pass the lottery entity to the checkResult method of the strategy.
+ * the QR should only parsed and give all the informations inside it.
  */
