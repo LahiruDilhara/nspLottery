@@ -68,7 +68,6 @@ export default class AdaKotipathiStrategy extends ILotteryStrategy {
             matchedMainSymboles: machedSymboles,
             matchedSpecialSymboles: machedSpecialSymboles,
         }
-
     }
 
 
