@@ -359,6 +359,40 @@ export default class ResultRepository implements IResultRepository {
     };
 
 
+    private govisethaResultSheet: ResultSheetEntity = {
+        date: new Date("2025-01-31"),
+        name: "Govisetha",
+        qrIndexes: {
+            barCode: 4,
+            drawNo: 2,
+            numbers: [6, 7, 8, 9],
+            symboles: [5],
+            tokensLength: 12,
+            specialSymboles: [
+                { category: "first", indexes: [10] },
+            ]
+        },
+        results: {
+            numbers: ["04", "35", "49", "59"],
+            symboles: ["F"],
+            specialSymboles: [
+                { category: "first", description: "regular", gift: "40", method: "OneToOne", results: ["J"] },
+            ],
+            prizes: [
+                60000000,
+                2000000,
+                250000,
+                5000,
+                2000,
+                200,
+                200,
+                40,
+                40,
+            ],
+        }
+    };
+
+
     getLotteryIdentifierScemeList(date: Date): { name: string; regex: RegExp; }[] | null {
         return this.lotteryScheme;
     }
@@ -375,6 +409,7 @@ export default class ResultRepository implements IResultRepository {
         else if (lotteryName == "DhanaNidhanaya") return this.dhanaNidhanayaResultSheet;
         else if (lotteryName == "MegaPower") return this.megaPowerResultScheet;
         else if (lotteryName == "Mahajana") return this.mahajanaSampathaResultSheet;
+        else if (lotteryName == "Govisetha") return this.govisethaResultSheet;
         return this.adaKotipathiResultScheet;
     }
 }
