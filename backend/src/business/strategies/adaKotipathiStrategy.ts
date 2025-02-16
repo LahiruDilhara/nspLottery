@@ -85,8 +85,3 @@ export default class AdaKotipathiStrategy extends ILotteryStrategy {
         else return 0
     }
 }
-
-type mainMatch = {
-    text: string,
-    match: boolean
-}[]

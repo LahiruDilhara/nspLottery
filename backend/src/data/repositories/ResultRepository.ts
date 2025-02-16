@@ -54,12 +54,40 @@ export default class ResultRepository implements IResultRepository {
             ]
         }
     };
+    private adaSampathaResultSheet: ResultSheetEntity = {
+        date: new Date("2025-01-27"),
+        name: "Ada Sampatha",
+        qrIndexes: {
+            drawNo: 2,
+            barCode: 4,
+            numbers: [6, 7, 8],
+            symboles: [5],
+            tokensLength: 10,
+            specialSymboles: [
+            ]
+        },
+        results: {
+            numbers: ["93", "668", "5822"],
+            prizes: [
+                250000,
+                50000,
+                4000,
+                1000,
+                80,
+            ],
+            symboles: ["F"],
+            specialSymboles: [
+            ]
+        }
+    };
     getLotteryIdentifierScemeList(date: Date): { name: string; regex: RegExp; }[] | null {
         return this.lotteryScheme;
     }
 
 
     getResultScheet(lotteryName: string, date: Date): ResultSheetEntity | null {
+        if (lotteryName == "AdaSampatha") return this.adaSampathaResultSheet;
+        else if (lotteryName == "AdaKotipathi") return this.adaKotipathiResultScheet;
         return this.adaKotipathiResultScheet;
     }
 }
