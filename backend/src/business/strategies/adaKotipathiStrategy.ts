@@ -44,28 +44,30 @@ export default class AdaKotipathiStrategy extends ILotteryStrategy {
     checkTheResult(result: Result, lotteryData: LotteryDataEntity): LotteryResultEntity {
 
         // get the maching main numbers which are formatted in correct order
-        let machingMainNumbers: { number: string, matched: boolean }[] = this.matchMainNumbers(result.numbers, lotteryData.numbers);
+        let machedMainNumbers: { number: string, matched: boolean }[] = this.matchMainNumbers(result.numbers, lotteryData.numbers);
 
         // get the maching symboles which are formatted in correct order
-        let machingSymboles: { symbole: string, matched: boolean }[] = this.matchSymboles(result.symboles, lotteryData.symboles);
+        let machedSymboles: { symbole: string, matched: boolean }[] = this.matchSymboles(result.symboles, lotteryData.symboles);
 
         // get the maching special symboles which are formatted in correct order
-        let specialSymboleMatched: MatchSpecialSymbole[] = this.checkSpecialSymboles(result.specialSymboles, lotteryData.specialSymboles);
+        let machedSpecialSymboles: MatchSpecialSymbole[] = this.checkSpecialSymboles(result.specialSymboles, lotteryData.specialSymboles);
 
         // calculate the maching main number count
-        let machingMainNumberCount = (machingMainNumbers.filter(mainNumber => mainNumber.matched === true)).length;
+        let machingMainNumberCount = (machedMainNumbers.filter(mainNumber => mainNumber.matched === true)).length;
 
         // calculate the main prize for the ada kotipathi lottery
-        let mainPrize = this.calculateMainPrize(result.prizes, machingMainNumberCount, machingSymboles[0].matched);
+        let totalWinMainPrize = this.calculateMainPrize(result.prizes, machingMainNumberCount, machedSymboles[0].matched);
 
+        // matched specialSymbolesCategoryCount
+        let machedSpecialSymbolesCategoryCount = (machedSpecialSymboles.filter(matchedSpecialSymbole => matchedSpecialSymbole.matched === true)).length;
 
-        console.log(mainPrize);
-        console.log(machingMainNumbers);
-        console.log(machingSymboles);
-        console.log(specialSymboleMatched);
-        console.log(specialSymboleMatched[0].symboles)
-
-        return new LotteryResultEntity()
+        return {
+            totalWinMainPrice: totalWinMainPrize,
+            matchedCategoryCount: machedSpecialSymbolesCategoryCount,
+            matchedMainNumbers: machedMainNumbers,
+            matchedMainSymboles: machedSymboles,
+            matchedSpecialSymboles: machedSpecialSymboles,
+        }
 
     }
 

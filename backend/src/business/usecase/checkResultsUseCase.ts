@@ -59,9 +59,9 @@ export async function CheckResultFromQR(QRDataString: string, resultRepository: 
     let lotteryData: LotteryDataEntity = lotteryStrategy.parseQRTokens(qrTokens, resultSheet.qrIndexes);
 
     // check the result using the lotteryDataEntity
-    lotteryStrategy.checkTheResult(resultSheet.results, lotteryData);
+    let results: LotteryResultEntity = lotteryStrategy.checkTheResult(resultSheet.results, lotteryData);
 
-    return Object();
+    return results;
 
 }
 

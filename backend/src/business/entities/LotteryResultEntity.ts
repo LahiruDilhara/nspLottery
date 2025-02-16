@@ -1,9 +1,9 @@
+import { MatchSpecialSymbole, Result } from "../types/types";
+
 export default class LotteryResultEntity {
-    totalWinPrize!: number;
-    specialSymboleWinGifts!: { category: string, gift: string }[];
-    resultStatus!: {
-        numbers: { number: string, matched: boolean }[],
-        symboles: { symbole: string, matched: boolean }[],
-        specialSymboles: { category: string, symboles: { symbole: string, matched: boolean }[] }
-    }
+    totalWinMainPrice!: number;
+    matchedCategoryCount!: number;
+    matchedMainNumbers!: { number: string, matched: boolean }[];
+    matchedMainSymboles!: { symbole: string, matched: boolean }[];
+    matchedSpecialSymboles!: MatchSpecialSymbole[];
 }
