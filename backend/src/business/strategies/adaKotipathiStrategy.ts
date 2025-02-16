@@ -74,14 +74,14 @@ export default class AdaKotipathiStrategy extends ILotteryStrategy {
 
     calculateMainPrize(prizes: number[], matchNumberCount: number, symboleMatched: boolean): number {
         if (matchNumberCount === 4 && symboleMatched) return prizes[0]
-        else if (matchNumberCount === 4) return prizes[2]
-        else if (matchNumberCount === 3 && symboleMatched) return prizes[3]
-        else if (matchNumberCount === 3) return prizes[4]
-        else if (matchNumberCount === 2 && symboleMatched) return prizes[5]
-        else if (matchNumberCount === 2) return prizes[6]
-        else if (matchNumberCount === 1 && symboleMatched) return prizes[7]
-        else if (matchNumberCount === 1) return prizes[8]
-        else if (symboleMatched) return prizes[9]
+        else if (matchNumberCount === 4) return prizes[1]
+        else if (matchNumberCount === 3 && symboleMatched) return prizes[2]
+        else if (matchNumberCount === 3) return prizes[3]
+        else if (matchNumberCount === 2 && symboleMatched) return prizes[4]
+        else if (matchNumberCount === 2) return prizes[5]
+        else if (matchNumberCount === 1 && symboleMatched) return prizes[6]
+        else if (matchNumberCount === 1) return prizes[7]
+        else if (symboleMatched) return prizes[8]
         else return 0
     }
 }
