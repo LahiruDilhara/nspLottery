@@ -392,6 +392,41 @@ export default class ResultRepository implements IResultRepository {
         }
     };
 
+    private lagnaWasanaResultSheet: ResultSheetEntity = {
+        date: new Date("2025-01-31"),
+        name: "Govisetha",
+        qrIndexes: {
+            barCode: 4,
+            drawNo: 2,
+            numbers: [5, 6, 7, 8],
+            symboles: [9],
+            tokensLength: 13,
+            specialSymboles: [
+                { category: "first", indexes: [10] },
+                { category: "second", indexes: [11] },
+            ]
+        },
+        results: {
+            numbers: ["09", "18", "24", "40"],
+            symboles: ["ARIES"],
+            specialSymboles: [
+                { category: "first", description: "regular", gift: "50000", method: "OneToOne", results: ["180673"] },
+                { category: "second", description: "regular", gift: "40", method: "OneToOne", results: ["525"] },
+            ],
+            prizes: [
+                3000000,
+                1000000,
+                20000,
+                2000,
+                400,
+                200,
+                120,
+                40,
+                40,
+            ],
+        }
+    };
+
 
     getLotteryIdentifierScemeList(date: Date): { name: string; regex: RegExp; }[] | null {
         return this.lotteryScheme;
@@ -410,6 +445,7 @@ export default class ResultRepository implements IResultRepository {
         else if (lotteryName == "MegaPower") return this.megaPowerResultScheet;
         else if (lotteryName == "Mahajana") return this.mahajanaSampathaResultSheet;
         else if (lotteryName == "Govisetha") return this.govisethaResultSheet;
+        else if (lotteryName == "LagnaWasana") return this.lagnaWasanaResultSheet;
         return this.adaKotipathiResultScheet;
     }
 }
