@@ -322,6 +322,43 @@ export default class ResultRepository implements IResultRepository {
             ],
         }
     };
+
+    private mahajanaSampathaResultSheet: ResultSheetEntity = {
+        date: new Date("2025-01-31"),
+        name: "Mahajana Sampatha",
+        qrIndexes: {
+            barCode: 4,
+            drawNo: 2,
+            numbers: [6],
+            symboles: [5],
+            tokensLength: 8,
+            specialSymboles: [
+            ]
+        },
+        results: {
+            numbers: ["5", "7", "8", "7", "5", "2"],
+            prizes: [
+                20000000,
+                2500000,
+                100000,
+                100000,
+                15000,
+                2000,
+                2000,
+                200,
+                200,
+                80,
+                40,
+                40,
+                40,
+            ],
+            symboles: ["W"],
+            specialSymboles: [
+            ]
+        }
+    };
+
+
     getLotteryIdentifierScemeList(date: Date): { name: string; regex: RegExp; }[] | null {
         return this.lotteryScheme;
     }
@@ -337,6 +374,7 @@ export default class ResultRepository implements IResultRepository {
         else if (lotteryName == "Hadahana") return this.hadahanaResultSheet;
         else if (lotteryName == "DhanaNidhanaya") return this.dhanaNidhanayaResultSheet;
         else if (lotteryName == "MegaPower") return this.megaPowerResultScheet;
+        else if (lotteryName == "Mahajana") return this.mahajanaSampathaResultSheet;
         return this.adaKotipathiResultScheet;
     }
 }
