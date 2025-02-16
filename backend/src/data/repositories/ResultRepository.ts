@@ -289,6 +289,39 @@ export default class ResultRepository implements IResultRepository {
         }
     };
 
+    private megaPowerResultScheet: ResultSheetEntity = {
+        date: new Date("2025-01-31"),
+        name: "Mega Power",
+        qrIndexes: {
+            barCode: 10,
+            drawNo: 2,
+            numbers: [5, 6, 7, 8],
+            symboles: [3, 4],
+            tokensLength: 12,
+            specialSymboles: [
+            ]
+        },
+        results: {
+            numbers: ["44", "45", "63", "75"],
+            symboles: ["Z", "25"],
+            specialSymboles: [
+            ],
+            prizes: [
+                150000000,
+                10000000,
+                10000000,
+                2000000,
+                200000,
+                5000,
+                2000,
+                200,
+                200,
+                40,
+                40,
+                40
+            ],
+        }
+    };
     getLotteryIdentifierScemeList(date: Date): { name: string; regex: RegExp; }[] | null {
         return this.lotteryScheme;
     }
@@ -303,6 +336,7 @@ export default class ResultRepository implements IResultRepository {
         else if (lotteryName == "SuperBall") return this.superBallResultSheet;
         else if (lotteryName == "Hadahana") return this.hadahanaResultSheet;
         else if (lotteryName == "DhanaNidhanaya") return this.dhanaNidhanayaResultSheet;
+        else if (lotteryName == "MegaPower") return this.megaPowerResultScheet;
         return this.adaKotipathiResultScheet;
     }
 }
