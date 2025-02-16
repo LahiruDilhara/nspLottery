@@ -185,6 +185,40 @@ export default class ResultRepository implements IResultRepository {
             ],
         }
     };
+
+    private superBallResultSheet: ResultSheetEntity = {
+        date: new Date("2025-01-31"),
+        name: "Super Ball",
+        qrIndexes: {
+            barCode: 4,
+            drawNo: 2,
+            numbers: [5, 6, 7, 8],
+            symboles: [9],
+            tokensLength: 12,
+            specialSymboles: [
+                { category: "first", indexes: [10] },
+            ]
+        },
+        results: {
+            numbers: ["05", "20", "27", "64"],
+            symboles: ["Q"],
+            specialSymboles: [
+                { category: "first", description: "regular", gift: "50000", method: "OneToOne", results: ["27520"] },
+            ],
+            prizes: [
+                50000000,
+                2000000,
+                200000,
+                4000,
+                2000,
+                200,
+                200,
+                40,
+                40,
+            ],
+        }
+    };
+
     getLotteryIdentifierScemeList(date: Date): { name: string; regex: RegExp; }[] | null {
         return this.lotteryScheme;
     }
@@ -196,6 +230,7 @@ export default class ResultRepository implements IResultRepository {
         else if (lotteryName == "SupiriDhanaSampatha") return this.supiriDhanaSampathaResultSheet;
         else if (lotteryName == "Jayodha") return this.jayodhaResultScheet;
         else if (lotteryName == "Kapruka") return this.kaprukaResultScheet;
+        else if (lotteryName == "SuperBall") return this.superBallResultSheet;
         return this.adaKotipathiResultScheet;
     }
 }
