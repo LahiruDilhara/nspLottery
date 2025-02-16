@@ -40,16 +40,28 @@ export default class AdaKotipathiStrategy extends ILotteryStrategy {
         }
     }
 
+    // before calling this method should validate the response for the required data.
     checkTheResult(result: Result, lotteryData: LotteryDataEntity): LotteryResultEntity {
-        let matchNumbers: string[] = _.intersection(result.numbers, lotteryData.numbers);
-        let symboleMatched: boolean = result.symboles[0] === lotteryData.symboles[0];
 
-        let mainPrize = this.calculateMainPrize(result.prizes, matchNumbers.length, symboleMatched);
+        // get the maching main numbers which are formatted in correct order
+        let machingMainNumbers: { number: string, matched: boolean }[] = this.matchMainNumbers(result.numbers, lotteryData.numbers);
 
+        // get the maching symboles which are formatted in correct order
+        let machingSymboles: { symbole: string, matched: boolean }[] = this.matchSymboles(result.symboles, lotteryData.symboles);
+
+        // get the maching special symboles which are formatted in correct order
         let specialSymboleMatched: MatchSpecialSymbole[] = this.checkSpecialSymboles(result.specialSymboles, lotteryData.specialSymboles);
 
-        console.log(matchNumbers);
-        console.log(symboleMatched);
+        // calculate the maching main number count
+        let machingMainNumberCount = (machingMainNumbers.filter(mainNumber => mainNumber.matched === true)).length;
+
+        // calculate the main prize for the ada kotipathi lottery
+        let mainPrize = this.calculateMainPrize(result.prizes, machingMainNumberCount, machingSymboles[0].matched);
+
+
+        console.log(mainPrize);
+        console.log(machingMainNumbers);
+        console.log(machingSymboles);
         console.log(specialSymboleMatched);
         console.log(specialSymboleMatched[0].symboles)
 

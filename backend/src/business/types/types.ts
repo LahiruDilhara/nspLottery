@@ -16,6 +16,6 @@ export type Result = {
 
 export type SpecialSymbole = { category: string, method: string, results: string[], gift: string, description: string }
 
-export type LotterySpecialSymboles = { category: string, symboles: string[] }
+export type LotterySpecialSymbole = { category: string, symboles: string[] }
 
 export type MatchSpecialSymbole = { category: string, symboles: { symbole: string, matched: boolean }[], gift: string, matched: boolean }

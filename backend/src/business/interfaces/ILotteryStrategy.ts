@@ -2,7 +2,7 @@ import LotteryDataEntity from "../entities/LotteryDataEntity";
 import LotteryEnitity from "../entities/LotteryEntity";
 import LotteryResultEntity from "../entities/LotteryResultEntity";
 import ResultSheetEntity from "../entities/ResultSheetEntity";
-import { LotterySpecialSymboles, MatchSpecialSymbole, QRIndexes, Result, SpecialSymbole } from "../types/types";
+import { LotterySpecialSymbole, MatchSpecialSymbole, QRIndexes, Result, SpecialSymbole } from "../types/types";
 
 export default abstract class ILotteryStrategy {
     abstract checkResult(tokens: string[]): Promise<number>;
@@ -26,23 +26,25 @@ export default abstract class ILotteryStrategy {
     }
 
 
-    checkSpecialSymboles(resultSpecialSymboles: SpecialSymbole[], lotterySpecialSymboles: LotterySpecialSymboles[]): MatchSpecialSymbole[] {
+    checkSpecialSymboles(resultSpecialSymboles: SpecialSymbole[], lotterySpecialSymboles: LotterySpecialSymbole[]): MatchSpecialSymbole[] {
         let matchList: MatchSpecialSymbole[] = [];
 
         lotterySpecialSymboles.forEach((lotterySymbole) => {
-            let resultCategory = resultSpecialSymboles.find((resultSymbole) => resultSymbole.category === lotterySymbole.category);
+            // find the result symbole that match the category
+            let resultSymbole = resultSpecialSymboles.find((resultSymbole) => resultSymbole.category === lotterySymbole.category);
 
-            if (resultCategory == undefined || resultCategory == null) return;
+            if (resultSymbole == undefined || resultSymbole == null) return;
 
-            if (resultCategory.method === "OneToOne") {
-                matchList.push(this.oneToOneMatch(resultCategory, lotterySymbole));
+            // if that category is OneToOne format, call the OneToOne method to calculate the machings
+            if (resultSymbole.method === "OneToOne") {
+                matchList.push(this.oneToOneMatch(resultSymbole, lotterySymbole));
             }
         });
 
         return matchList;
     }
 
-    oneToOneMatch(resultSymbole: SpecialSymbole, lotterySymbole: LotterySpecialSymboles): MatchSpecialSymbole {
+    oneToOneMatch(resultSymbole: SpecialSymbole, lotterySymbole: LotterySpecialSymbole): MatchSpecialSymbole {
         let match: MatchSpecialSymbole = {
             category: resultSymbole.category,
             symboles: [],
@@ -50,6 +52,7 @@ export default abstract class ILotteryStrategy {
             matched: false
         };
 
+        // match the symbole
         if (lotterySymbole.symboles[0] === resultSymbole.results[0]) {
             match.symboles.push({ matched: true, symbole: lotterySymbole.symboles[0] });
             match.matched = true;
@@ -60,6 +63,32 @@ export default abstract class ILotteryStrategy {
         }
 
         return match;
+    }
+
+    matchMainNumbers(resultNumbers: string[], lotteryNumbers: string[]): { number: string, matched: boolean }[] {
+        let maches: { number: string, matched: boolean }[] = []
+        lotteryNumbers.forEach(lotteryNumber => {
+            if (resultNumbers.find(resultNumber => resultNumber === lotteryNumber)) {
+                maches.push({ number: lotteryNumber, matched: true });
+            } else {
+                maches.push({ number: lotteryNumber, matched: false });
+            }
+        })
+
+        return maches;
+    }
+
+    matchSymboles(resultSymboles: string[], lotterySymboles: string[]): { symbole: string, matched: boolean }[] {
+        let maches: { symbole: string, matched: boolean }[] = [];
+        lotterySymboles.forEach(lotterySymbole => {
+            if (resultSymboles.find(resultSymbole => resultSymbole === lotterySymbole)) {
+                maches.push({ symbole: lotterySymbole, matched: true });
+            } else {
+                maches.push({ symbole: lotterySymbole, matched: false });
+            }
+        })
+
+        return maches;
     }
 }
 
