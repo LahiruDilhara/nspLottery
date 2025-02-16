@@ -119,7 +119,38 @@ export default class ResultRepository implements IResultRepository {
                 { category: "second", description: "regular", gift: "40", method: "OneToOne", results: ["580"] },
             ]
         }
-    }
+    };
+
+    private jayodhaResultScheet: ResultSheetEntity = {
+        date: new Date("2025-01-29"),
+        name: "Jayodha",
+        qrIndexes: {
+            barCode: 3,
+            drawNo: 1,
+            numbers: [4, 5, 6, 7],
+            symboles: [8],
+            tokensLength: 10,
+            specialSymboles: [
+            ]
+        },
+        results: {
+            numbers: ["04", "26", "31", "65"],
+            prizes: [
+                20000000,
+                2000000,
+                100000,
+                4000,
+                2000,
+                200,
+                80,
+                40,
+                40
+            ],
+            symboles: ["O"],
+            specialSymboles: [
+            ]
+        }
+    };
     getLotteryIdentifierScemeList(date: Date): { name: string; regex: RegExp; }[] | null {
         return this.lotteryScheme;
     }
@@ -129,6 +160,7 @@ export default class ResultRepository implements IResultRepository {
         if (lotteryName == "AdaSampatha") return this.adaSampathaResultSheet;
         else if (lotteryName == "AdaKotipathi") return this.adaKotipathiResultScheet;
         else if (lotteryName == "SupiriDhanaSampatha") return this.supiriDhanaSampathaResultSheet;
+        else if (lotteryName == "Jayodha") return this.jayodhaResultScheet;
         return this.adaKotipathiResultScheet;
     }
 }
