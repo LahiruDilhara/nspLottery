@@ -80,6 +80,46 @@ export default class ResultRepository implements IResultRepository {
             ]
         }
     };
+
+    private supiriDhanaSampathaResultSheet: ResultSheetEntity = {
+        date: new Date("2025-01-27"),
+        name: "Supiri Dhana Sampatha",
+        qrIndexes: {
+            barCode: 2,
+            drawNo: 0,
+            numbers: [4, 5, 6, 7, 8, 9],
+            symboles: [3],
+            tokensLength: 13,
+            specialSymboles: [
+                { category: "first", indexes: [10] },
+                { category: "second", indexes: [11] },
+            ]
+        },
+        results: {
+            numbers: ["5", "1", "6", "0", "2", "6"],
+            prizes: [
+                20000000,
+                2500000,
+                100000,
+                100000,
+                20000,
+                2000,
+                2000,
+                500,
+                200,
+                200,
+                120,
+                40,
+                40,
+                40,
+            ],
+            symboles: ["Z"],
+            specialSymboles: [
+                { category: "first", description: "regular", gift: "50000", method: "OneToOne", results: ["71401"] },
+                { category: "second", description: "regular", gift: "40", method: "OneToOne", results: ["580"] },
+            ]
+        }
+    }
     getLotteryIdentifierScemeList(date: Date): { name: string; regex: RegExp; }[] | null {
         return this.lotteryScheme;
     }
@@ -88,6 +128,7 @@ export default class ResultRepository implements IResultRepository {
     getResultScheet(lotteryName: string, date: Date): ResultSheetEntity | null {
         if (lotteryName == "AdaSampatha") return this.adaSampathaResultSheet;
         else if (lotteryName == "AdaKotipathi") return this.adaKotipathiResultScheet;
+        else if (lotteryName == "SupiriDhanaSampatha") return this.supiriDhanaSampathaResultSheet;
         return this.adaKotipathiResultScheet;
     }
 }

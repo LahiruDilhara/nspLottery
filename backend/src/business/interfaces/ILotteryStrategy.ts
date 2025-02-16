@@ -25,7 +25,6 @@ export default abstract class ILotteryStrategy {
         return new LotteryResultEntity();
     }
 
-
     checkSpecialSymboles(resultSpecialSymboles: SpecialSymbole[], lotterySpecialSymboles: LotterySpecialSymbole[]): MatchSpecialSymbole[] {
         let matchList: MatchSpecialSymbole[] = [];
 
@@ -82,6 +81,34 @@ export default abstract class ILotteryStrategy {
         let maches: { symbole: string, matched: boolean }[] = [];
         lotterySymboles.forEach(lotterySymbole => {
             if (resultSymboles.find(resultSymbole => resultSymbole === lotterySymbole)) {
+                maches.push({ symbole: lotterySymbole, matched: true });
+            } else {
+                maches.push({ symbole: lotterySymbole, matched: false });
+            }
+        })
+
+        return maches;
+    }
+
+    matchMainNumbersInOrder(resultNumbers: string[], lotteryNumbers: string[]): { number: string, matched: boolean }[] {
+        let maches: { number: string, matched: boolean }[] = [];
+
+        lotteryNumbers.forEach((lotteryNumber, index) => {
+            if (resultNumbers[index] === lotteryNumber) {
+                maches.push({ number: lotteryNumber, matched: true });
+            }
+            else {
+                maches.push({ number: lotteryNumber, matched: false });
+            }
+        })
+
+        return maches;
+    }
+
+    matchSymbolesInOrder(resultSymboles: string[], lotterySymboles: string[]): { symbole: string, matched: boolean }[] {
+        let maches: { symbole: string, matched: boolean }[] = [];
+        lotterySymboles.forEach((lotterySymbole, index) => {
+            if (resultSymboles[index] === lotterySymbole) {
                 maches.push({ symbole: lotterySymbole, matched: true });
             } else {
                 maches.push({ symbole: lotterySymbole, matched: false });

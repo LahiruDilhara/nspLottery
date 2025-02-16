@@ -6,6 +6,7 @@ import LotteryStrategyFactory from "../strategies/lotteryStrategyFactory";
 import IResultRepository from '../interfaces/IResultRepository';
 import LotteryDataEntity from "../entities/LotteryDataEntity";
 import LotteryResultEntity from "../entities/LotteryResultEntity";
+import _ from "lodash"
 
 export default async function CheckResultFromLotteryString(lotteryDataString: string): Promise<object> {
     // get the appropriate lottery strategy
@@ -24,7 +25,7 @@ export default async function CheckResultFromLotteryString(lotteryDataString: st
     // return { name: strategy.toString() };
 }
 
-export async function CheckResultFromQR(QRDataString: string, resultRepository: IResultRepository): Promise<object> {
+export async function CheckResultFromQR(QRDataString: string, resultRepository: IResultRepository): Promise<LotteryResultEntity> {
 
     // get the date from the lottery qr
     let date: Date | null = LotteryParser.parseDate(QRDataString);
