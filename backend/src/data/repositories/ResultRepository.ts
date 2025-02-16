@@ -254,6 +254,41 @@ export default class ResultRepository implements IResultRepository {
         }
     };
 
+    private dhanaNidhanayaResultSheet: ResultSheetEntity = {
+        date: new Date("2025-01-31"),
+        name: "Dhana Nidhanaya",
+        qrIndexes: {
+            barCode: 11,
+            drawNo: 2,
+            numbers: [4, 5, 6, 7],
+            symboles: [3],
+            tokensLength: 13,
+            specialSymboles: [
+                { category: "first", indexes: [8] },
+                { category: "second", indexes: [9] },
+            ]
+        },
+        results: {
+            numbers: ["17", "49", "70", "72"],
+            symboles: ["A"],
+            specialSymboles: [
+                { category: "first", description: "regular", gift: "40", method: "OneToOne", results: ["J"] },
+                { category: "second", description: "regular", gift: "100000", method: "OneToOne", results: ["69497"] },
+            ],
+            prizes: [
+                80000000,
+                2000000,
+                200000,
+                6000,
+                2000,
+                200,
+                120,
+                40,
+                40,
+            ],
+        }
+    };
+
     getLotteryIdentifierScemeList(date: Date): { name: string; regex: RegExp; }[] | null {
         return this.lotteryScheme;
     }
@@ -267,6 +302,7 @@ export default class ResultRepository implements IResultRepository {
         else if (lotteryName == "Kapruka") return this.kaprukaResultScheet;
         else if (lotteryName == "SuperBall") return this.superBallResultSheet;
         else if (lotteryName == "Hadahana") return this.hadahanaResultSheet;
+        else if (lotteryName == "DhanaNidhanaya") return this.dhanaNidhanayaResultSheet;
         return this.adaKotipathiResultScheet;
     }
 }
