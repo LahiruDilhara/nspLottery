@@ -1,8 +1,7 @@
-import LotteryDataEntity from "../entities/LotteryDataEntity";
 import LotteryEnitity from "../entities/LotteryEntity";
-import LotteryResultEntity from "../entities/LotteryResultEntity";
 import ILotteryStrategy from "../interfaces/ILotteryStrategy";
-import _ from "lodash";
+import LotteryResultEntity from "../entities/LotteryResultEntity";
+import LotteryDataEntity from "../entities/LotteryDataEntity";
 import { MatchSpecialSymbole, QRIndexes, Result } from "../types/types";
 
 export default class AdaKotipathiStrategy extends ILotteryStrategy {

@@ -219,6 +219,41 @@ export default class ResultRepository implements IResultRepository {
         }
     };
 
+    private hadahanaResultSheet: ResultSheetEntity = {
+        date: new Date("2025-01-31"),
+        name: "Hadahana",
+        qrIndexes: {
+            barCode: 3,
+            drawNo: 1,
+            numbers: [5, 6, 7, 8],
+            symboles: [4],
+            tokensLength: 12,
+            specialSymboles: [
+                { category: "first", indexes: [9] },
+                { category: "second", indexes: [10] },
+            ]
+        },
+        results: {
+            numbers: ["21", "34", "36", "45"],
+            symboles: ["SAJ"],
+            specialSymboles: [
+                { category: "first", description: "regular", gift: "50000", method: "OneToOne", results: ["91738"] },
+                { category: "second", description: "regular", gift: "40", method: "OneToOne", results: ["10"] },
+            ],
+            prizes: [
+                3000000,
+                1000000,
+                25000,
+                2000,
+                500,
+                200,
+                120,
+                40,
+                40,
+            ],
+        }
+    };
+
     getLotteryIdentifierScemeList(date: Date): { name: string; regex: RegExp; }[] | null {
         return this.lotteryScheme;
     }
@@ -231,6 +266,7 @@ export default class ResultRepository implements IResultRepository {
         else if (lotteryName == "Jayodha") return this.jayodhaResultScheet;
         else if (lotteryName == "Kapruka") return this.kaprukaResultScheet;
         else if (lotteryName == "SuperBall") return this.superBallResultSheet;
+        else if (lotteryName == "Hadahana") return this.hadahanaResultSheet;
         return this.adaKotipathiResultScheet;
     }
 }
