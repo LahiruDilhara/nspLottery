@@ -1,5 +1,4 @@
 import LotteryDataEntity from "../entities/LotteryDataEntity";
-import LotteryEnitity from "../entities/LotteryEntity";
 import LotteryResultEntity from "../entities/LotteryResultEntity";
 import ILotteryStrategy from "../interfaces/ILotteryStrategy";
 import { MatchSpecialSymbole, QRIndexes, Result } from "../types/types";

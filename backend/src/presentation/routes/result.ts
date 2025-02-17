@@ -1,7 +1,7 @@
 import express from "express";
-import CheckResultFromLotteryString, { CheckResultFromQR } from "../../business/usecase/checkResultsUseCase";
 import ErrorDto from "../dto/error/errorDto";
 import ResultRepository from "../../data/repositories/ResultRepository";
+import { CheckResultFromQR } from "../../business/usecase/checkResultsUseCase";
 
 const resultRouter = express.Router();
 

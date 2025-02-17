@@ -8,22 +8,6 @@ import LotteryDataEntity from "../entities/LotteryDataEntity";
 import LotteryResultEntity from "../entities/LotteryResultEntity";
 import _ from "lodash"
 
-export default async function CheckResultFromLotteryString(lotteryDataString: string): Promise<object> {
-    // get the appropriate lottery strategy
-    let strategy = selectTheStrategy(lotteryDataString);
-
-    if (strategy == null) {
-        throw new Error("Unrecognized lottery type");
-    }
-
-    // tokanize the lottery data string
-    let lotteryStringToken = Tokenizer.tokenizeStringBySpaces(lotteryDataString);
-
-    // return (await strategy.checkResult(lotteryStringToken)).toString();
-    // return .toString();
-    return strategy.parseFromQRStringTokens(lotteryStringToken);
-    // return { name: strategy.toString() };
-}
 
 export async function CheckResultFromQR(QRDataString: string, resultRepository: IResultRepository): Promise<LotteryResultEntity> {
 

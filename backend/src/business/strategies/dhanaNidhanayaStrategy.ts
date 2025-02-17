@@ -1,4 +1,3 @@
-import LotteryEnitity from "../entities/LotteryEntity";
 import ILotteryStrategy from "../interfaces/ILotteryStrategy";
 import LotteryResultEntity from "../entities/LotteryResultEntity";
 import LotteryDataEntity from "../entities/LotteryDataEntity";

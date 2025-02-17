@@ -4,6 +4,7 @@ import configRoutes from "./startups/routes";
 import checkConfigurations from "./startups/config";
 import configDatabase from "./startups/database";
 import bindNetwork from "./startups/bindApp";
+import init from "./business/initialize";
 
 async function main() {
     // create the express application
@@ -17,6 +18,9 @@ async function main() {
 
     // configure all middlware routes
     configRoutes(app);
+
+    // configure the business logic
+    init();
 
     // configure the server and the port number
     bindNetwork(app);
