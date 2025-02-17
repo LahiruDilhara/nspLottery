@@ -6,9 +6,9 @@ export default abstract class ILotteryStrategy {
 
     abstract toString(): string;
 
-    abstract parseQRTokens(tokens: string[], qrIndexes: QRIndexes): LotteryDataEntity;
+    abstract parseQRTokens(tokens: string[], qrIndexes: QRIndexes): LotteryDataEntity | null;
 
-    abstract checkTheResult(result: Result, lotteryData: LotteryDataEntity): LotteryResultEntity;
+    abstract checkTheResult(result: Result, lotteryData: LotteryDataEntity): LotteryResultEntity | null;
 
     checkSpecialSymboles(resultSpecialSymboles: SpecialSymbole[], lotterySpecialSymboles: LotterySpecialSymbole[]): MatchSpecialSymbole[] {
         let matchList: MatchSpecialSymbole[] = [];

@@ -34,6 +34,7 @@ export async function CheckResultFromQR(QRDataString: string, resultRepository: 
 
     // tokenized the QR code by spaces
     let qrTokens: string[] = Tokenizer.tokenizeStringBySpaces(QRDataString);
+    if (qrTokens.length <= 4) throw Error("Invalid lottery length or invalid number of spaces");
 
     // get the result scheet for the specified date
     let resultSheet = resultRepository.getResultScheet(lotteryName, date);
@@ -41,10 +42,12 @@ export async function CheckResultFromQR(QRDataString: string, resultRepository: 
     if (resultSheet.qrIndexes.tokensLength != qrTokens.length) throw Error("Invalid qr token length");
 
     // get the lottery Entity object by parsing the qr tokens through the strategy
-    let lotteryData: LotteryDataEntity = lotteryStrategy.parseQRTokens(qrTokens, resultSheet.qrIndexes);
+    let lotteryData: LotteryDataEntity | null = lotteryStrategy.parseQRTokens(qrTokens, resultSheet.qrIndexes);
+    if (lotteryData == null) throw Error("The lottery data is not valid");
 
     // check the result using the lotteryDataEntity
-    let results: LotteryResultEntity = lotteryStrategy.checkTheResult(resultSheet.results, lotteryData);
+    let results: LotteryResultEntity | null = lotteryStrategy.checkTheResult(resultSheet.results, lotteryData);
+    if (results == null) throw Error("The result is not matching");
 
     return results;
 

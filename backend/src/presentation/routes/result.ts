@@ -28,7 +28,7 @@ resultRouter.post("/qr", async (request: express.Request, response: express.Resp
             return;
         }
         else {
-            response.send(new ErrorDto(`UnRecognized Error ${e}`));
+            response.send(new ErrorDto(`UnRecognized Error "${e}"`));
             return;
         }
     }
