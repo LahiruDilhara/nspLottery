@@ -461,6 +461,40 @@ export default class ResultRepository implements IResultRepository {
         }
     };
 
+    private jayaResultSheet: ResultSheetEntity = {
+        date: new Date("2025-01-31"),
+        name: "Jaya",
+        qrIndexes: {
+            barCode: 4,
+            drawNo: 2,
+            numbers: [6, 7, 8, 9],
+            symboles: [5],
+            tokensLength: 14,
+            specialSymboles: [
+                { category: "first", indexes: [10] },
+                { category: "second", indexes: [11] },
+                { category: "third", indexes: [12] },
+            ]
+        },
+        results: {
+            numbers: ["4", "7", "7", "6"],
+            symboles: ["K"],
+            specialSymboles: [
+                { category: "first", description: "regular", gift: "10000000", method: "OneToOne", results: ["797023"] },
+                { category: "second", description: "regular", gift: "100000", method: "OneToOne", results: ["34912"] },
+                { category: "third", description: "regular", gift: "car", method: "OneToOne", results: ["2465098"] },
+            ],
+            prizes: [
+                500000,
+                50000,
+                2000,
+                200,
+                40,
+                40,
+            ],
+        }
+    };
+
 
     getLotteryIdentifierScemeList(date: Date): { name: string; regex: RegExp; }[] | null {
         return this.lotteryScheme;
@@ -481,6 +515,7 @@ export default class ResultRepository implements IResultRepository {
         else if (lotteryName == "Govisetha") return this.govisethaResultSheet;
         else if (lotteryName == "LagnaWasana") return this.lagnaWasanaResultSheet;
         else if (lotteryName == "Shanida") return this.shanidaResultSheet;
+        else if (lotteryName == "Jaya") return this.jayaResultSheet;
         return this.adaKotipathiResultScheet;
     }
 }

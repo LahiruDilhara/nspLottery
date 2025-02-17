@@ -47,7 +47,7 @@ export default class MahajanaStrategy extends ILotteryStrategy {
             numbers = tokens[qrIndexes.numbers[0]].split("");
         }
         else {
-            qrIndexes.numbers.map(numberIndex => tokens[numberIndex])
+            numbers = qrIndexes.numbers.map(numberIndex => tokens[numberIndex])
         }
         return {
             barcode: tokens[qrIndexes.barCode],
