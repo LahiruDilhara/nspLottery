@@ -495,6 +495,31 @@ export default class ResultRepository implements IResultRepository {
         }
     };
 
+    private sasiriResultSheet: ResultSheetEntity = {
+        date: new Date("2025-01-31"),
+        name: "Sasiri",
+        qrIndexes: {
+            barCode: 2,
+            drawNo: 0,
+            numbers: [3, 4, 5],
+            symboles: [],
+            tokensLength: 7,
+            specialSymboles: [
+            ]
+        },
+        results: {
+            numbers: ["12", "36", "43"],
+            symboles: [],
+            specialSymboles: [
+            ],
+            prizes: [
+                200000,
+                400,
+                40,
+            ],
+        }
+    };
+
 
     getLotteryIdentifierScemeList(date: Date): { name: string; regex: RegExp; }[] | null {
         return this.lotteryScheme;
@@ -516,6 +541,7 @@ export default class ResultRepository implements IResultRepository {
         else if (lotteryName == "LagnaWasana") return this.lagnaWasanaResultSheet;
         else if (lotteryName == "Shanida") return this.shanidaResultSheet;
         else if (lotteryName == "Jaya") return this.jayaResultSheet;
+        else if (lotteryName == "Sasiri") return this.sasiriResultSheet;
         return this.adaKotipathiResultScheet;
     }
 }
