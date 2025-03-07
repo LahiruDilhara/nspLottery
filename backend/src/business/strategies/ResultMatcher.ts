@@ -2,12 +2,12 @@ import { LotterySpecialSymbole, MatchSpecialSymbole, SpecialSymbole } from "../t
 
 export default class ResultMatcher {
 
-    checkSpecialSymboles(resultSpecialSymboles: SpecialSymbole[], lotterySpecialSymboles: LotterySpecialSymbole[]): MatchSpecialSymbole[] {
+    checkSpecialSymboles(wonSymboles: SpecialSymbole[], lotterySymboles: LotterySpecialSymbole[]): MatchSpecialSymbole[] {
         let matchList: MatchSpecialSymbole[] = [];
 
-        lotterySpecialSymboles.forEach((lotterySymbole) => {
+        lotterySymboles.forEach((lotterySymbole) => {
             // find the result symbole that match the category
-            let resultSymbole = resultSpecialSymboles.find((resultSymbole) => resultSymbole.category === lotterySymbole.category);
+            let resultSymbole = wonSymboles.find((resultSymbole) => resultSymbole.category === lotterySymbole.category);
 
             if (resultSymbole == undefined || resultSymbole == null) return;
 
@@ -20,16 +20,16 @@ export default class ResultMatcher {
         return matchList;
     }
 
-    oneToOneMatch(resultSymbole: SpecialSymbole, lotterySymbole: LotterySpecialSymbole): MatchSpecialSymbole {
+    oneToOneMatch(wonSymbole: SpecialSymbole, lotterySymbole: LotterySpecialSymbole): MatchSpecialSymbole {
         let match: MatchSpecialSymbole = {
-            category: resultSymbole.category,
+            category: wonSymbole.category,
             symboles: [],
-            gift: resultSymbole.gift,
+            gift: wonSymbole.gift,
             matched: false
         };
 
         // match the symbole
-        if (lotterySymbole.symboles[0] === resultSymbole.results[0]) {
+        if (lotterySymbole.symboles[0] === wonSymbole.results[0]) {
             match.symboles.push({ matched: true, symbole: lotterySymbole.symboles[0] });
             match.matched = true;
         }
@@ -41,10 +41,10 @@ export default class ResultMatcher {
         return match;
     }
 
-    matchMainNumbers(resultNumbers: string[], lotteryNumbers: string[]): { number: string, matched: boolean }[] {
+    matchMainNumbers(wonNmbers: string[], lotteryNumbers: string[]): { number: string, matched: boolean }[] {
         let maches: { number: string, matched: boolean }[] = []
         lotteryNumbers.forEach(lotteryNumber => {
-            if (resultNumbers.find(resultNumber => resultNumber === lotteryNumber)) {
+            if (wonNmbers.find(resultNumber => resultNumber === lotteryNumber)) {
                 maches.push({ number: lotteryNumber, matched: true });
             } else {
                 maches.push({ number: lotteryNumber, matched: false });
@@ -54,10 +54,10 @@ export default class ResultMatcher {
         return maches;
     }
 
-    matchSymboles(resultSymboles: string[], lotterySymboles: string[]): { symbole: string, matched: boolean }[] {
+    matchSymboles(wonSymboles: string[], lotterySymboles: string[]): { symbole: string, matched: boolean }[] {
         let maches: { symbole: string, matched: boolean }[] = [];
         lotterySymboles.forEach(lotterySymbole => {
-            if (resultSymboles.find(resultSymbole => resultSymbole === lotterySymbole)) {
+            if (wonSymboles.find(resultSymbole => resultSymbole === lotterySymbole)) {
                 maches.push({ symbole: lotterySymbole, matched: true });
             } else {
                 maches.push({ symbole: lotterySymbole, matched: false });
@@ -67,11 +67,11 @@ export default class ResultMatcher {
         return maches;
     }
 
-    matchMainNumbersInOrder(resultNumbers: string[], lotteryNumbers: string[]): { number: string, matched: boolean }[] {
+    matchMainNumbersInOrder(wonNumbers: string[], lotteryNumbers: string[]): { number: string, matched: boolean }[] {
         let maches: { number: string, matched: boolean }[] = [];
 
         lotteryNumbers.forEach((lotteryNumber, index) => {
-            if (resultNumbers[index] === lotteryNumber) {
+            if (wonNumbers[index] === lotteryNumber) {
                 maches.push({ number: lotteryNumber, matched: true });
             }
             else {
@@ -82,10 +82,10 @@ export default class ResultMatcher {
         return maches;
     }
 
-    matchSymbolesInOrder(resultSymboles: string[], lotterySymboles: string[]): { symbole: string, matched: boolean }[] {
+    matchSymbolesInOrder(wonSymboles: string[], lotterySymboles: string[]): { symbole: string, matched: boolean }[] {
         let maches: { symbole: string, matched: boolean }[] = [];
         lotterySymboles.forEach((lotterySymbole, index) => {
-            if (resultSymboles[index] === lotterySymbole) {
+            if (wonSymboles[index] === lotterySymbole) {
                 maches.push({ symbole: lotterySymbole, matched: true });
             } else {
                 maches.push({ symbole: lotterySymbole, matched: false });
