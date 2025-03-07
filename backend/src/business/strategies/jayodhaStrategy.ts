@@ -2,9 +2,9 @@ import LotteryDataEntity from "../entities/LotteryDataEntity";
 import LotteryResultEntity from "../entities/LotteryResultEntity";
 import ILotteryStrategy from "../interfaces/ILotteryStrategy";
 import { MatchSpecialSymbole, QRIndexes, Result } from "../types/types";
-import ResultCheckingUtils from "./resultCheckingUtils";
+import ResultMatcher from "./ResultMatcher";
 
-export default class JayodhaStrategy extends ResultCheckingUtils implements ILotteryStrategy {
+export default class JayodhaStrategy extends ResultMatcher implements ILotteryStrategy {
 
     toString(): string {
         return "jayodha";

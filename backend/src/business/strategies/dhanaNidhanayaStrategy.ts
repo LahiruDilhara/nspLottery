@@ -2,9 +2,9 @@ import ILotteryStrategy from "../interfaces/ILotteryStrategy";
 import LotteryResultEntity from "../entities/LotteryResultEntity";
 import LotteryDataEntity from "../entities/LotteryDataEntity";
 import { MatchSpecialSymbole, QRIndexes, Result } from "../types/types";
-import ResultCheckingUtils from "./resultCheckingUtils";
+import ResultMatcher from "./ResultMatcher";
 
-export default class DhanaNidhanayaStrategy extends ResultCheckingUtils implements ILotteryStrategy {
+export default class DhanaNidhanayaStrategy extends ResultMatcher implements ILotteryStrategy {
     toString(): string {
         return "Dhana nidhanaya";
     }

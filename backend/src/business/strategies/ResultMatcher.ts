@@ -1,6 +1,6 @@
 import { LotterySpecialSymbole, MatchSpecialSymbole, SpecialSymbole } from "../types/types";
 
-export default class ResultCheckingUtils {
+export default class ResultMatcher {
 
     checkSpecialSymboles(resultSpecialSymboles: SpecialSymbole[], lotterySpecialSymboles: LotterySpecialSymbole[]): MatchSpecialSymbole[] {
         let matchList: MatchSpecialSymbole[] = [];
