@@ -3,8 +3,9 @@ import LotteryResultEntity from "../entities/LotteryResultEntity";
 import ILotteryStrategy from "../interfaces/ILotteryStrategy";
 import { MatchSpecialSymbole, QRIndexes, Result } from "../types/types";
 import _ from "lodash";
+import ResultCheckingUtils from "./resultCheckingUtils";
 
-export default class SupiriDhanaSampathaStrategy extends ILotteryStrategy {
+export default class SupiriDhanaSampathaStrategy extends ResultCheckingUtils implements ILotteryStrategy {
 
     toString(): string {
         return "supiri dhana sampatha";

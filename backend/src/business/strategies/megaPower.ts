@@ -2,8 +2,9 @@ import ILotteryStrategy from "../interfaces/ILotteryStrategy";
 import LotteryResultEntity from "../entities/LotteryResultEntity";
 import LotteryDataEntity from "../entities/LotteryDataEntity";
 import { MatchSpecialSymbole, QRIndexes, Result } from "../types/types";
+import ResultCheckingUtils from "./resultCheckingUtils";
 
-export default class MegaPowerStrategy extends ILotteryStrategy {
+export default class MegaPowerStrategy extends ResultCheckingUtils implements ILotteryStrategy {
     toString(): string {
         return "mega power";
     }

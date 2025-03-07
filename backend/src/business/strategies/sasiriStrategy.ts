@@ -2,8 +2,9 @@ import ILotteryStrategy from "../interfaces/ILotteryStrategy";
 import LotteryResultEntity from "../entities/LotteryResultEntity";
 import LotteryDataEntity from "../entities/LotteryDataEntity";
 import { MatchSpecialSymbole, QRIndexes, Result } from "../types/types";
+import ResultCheckingUtils from "./resultCheckingUtils";
 
-export default class SasiriStrategy extends ILotteryStrategy {
+export default class SasiriStrategy extends ResultCheckingUtils implements ILotteryStrategy {
     toString(): string {
         return "sasiri";
     }

@@ -2,8 +2,9 @@ import ILotteryStrategy from "../interfaces/ILotteryStrategy";
 import LotteryDataEntity from "../entities/LotteryDataEntity";
 import LotteryResultEntity from "../entities/LotteryResultEntity";
 import { MatchSpecialSymbole, QRIndexes, Result } from "../types/types";
+import ResultCheckingUtils from "./resultCheckingUtils";
 
-export default class LagnaWasanaStrategy extends ILotteryStrategy {
+export default class LagnaWasanaStrategy extends ResultCheckingUtils implements ILotteryStrategy {
 
     toString(): string {
         return "Lagna wasana";

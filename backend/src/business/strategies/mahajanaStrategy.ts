@@ -3,8 +3,9 @@ import ILotteryStrategy from "../interfaces/ILotteryStrategy";
 import LotteryResultEntity from "../entities/LotteryResultEntity";
 import { MatchSpecialSymbole, QRIndexes, Result } from "../types/types";
 import _ from "lodash";
+import ResultCheckingUtils from "./resultCheckingUtils";
 
-export default class MahajanaStrategy extends ILotteryStrategy {
+export default class MahajanaStrategy extends ResultCheckingUtils implements ILotteryStrategy {
 
     toString(): string {
         return "mahajana";

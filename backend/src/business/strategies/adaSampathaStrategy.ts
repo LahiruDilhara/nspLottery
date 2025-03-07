@@ -2,8 +2,9 @@ import LotteryDataEntity from "../entities/LotteryDataEntity";
 import LotteryResultEntity from "../entities/LotteryResultEntity";
 import ILotteryStrategy from "../interfaces/ILotteryStrategy";
 import { MatchSpecialSymbole, QRIndexes, Result } from "../types/types";
+import ResultCheckingUtils from "./resultCheckingUtils";
 
-export default class AdaSampathaStrategy extends ILotteryStrategy {
+export default class AdaSampathaStrategy extends ResultCheckingUtils implements ILotteryStrategy {
 
     toString(): string {
         return "Ada Sampatha";
