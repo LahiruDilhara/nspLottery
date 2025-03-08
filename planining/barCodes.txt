@@ -1,3 +1,5 @@
+look at the jayodhaStrategy.ts and this test file for it. you have to generate code to test each case as this. in jayodhaStrategy go from bottom to top of the main result check if conditions and write these test. as an example the next test is "should give the main win prize as 40 when one number match". look at the adaKotipathiStrategy.test.ts for references
+
 # ada sampatha (barcode 086003100387491, Draw No. 0310, Date 2025/02/02)
 # regex "^Ada\s+Sampatha\s+\d+\s+(\d{2}\.){2}\d{4}\s+\d{15}\s+[A-Z](\s+(\d{2,4})){3}"
 
@@ -11,7 +13,6 @@ Ada Sampatha 0282 05.01.2025 086002820307494 J 44 189 4147  http>&&r.nlb.lk&0860
 
 JAYODA 2099 2025&01&29 2099727212786806 04 26 31 65 O www.dlb.lk    (O 04 26 31 65)
 JAYODA 2100 2025&02&03 2100606313280806 01 20 46 55 D www.dlb.lk    (D 01 20 46 55)
-
 
 
 # supiri dhana sampatha (barcode 0437/663262529/0/05, Darw No. 0437, Date 2025/01/27)

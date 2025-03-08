@@ -9,8 +9,8 @@ import LotteryResultEntity from "../../../src/business/entities/LotteryResultEnt
 
 describe("adaKotipathiStrategy", () => {
     let strategy: ILotteryStrategy;
-    let adaKotipathiResultScheet: ResultSheetEntity;
-    let adaKotipathiQRCode: string
+    let resultSheet: ResultSheetEntity;
+    let qrCode: string
     let lotteryData: LotteryDataEntity;
     let qrTokens: string[]
     let lotteryResult: LotteryResultEntity;
@@ -24,7 +24,7 @@ describe("adaKotipathiStrategy", () => {
         lotteryResult.matchedMainSymboles = symboles;
 
         // Action
-        const result = strategy.checkTheResult(adaKotipathiResultScheet.results, lotteryData);
+        const result = strategy.checkTheResult(resultSheet.results, lotteryData);
 
         // Assert
         expect(result).toEqual(lotteryResult);
@@ -32,7 +32,7 @@ describe("adaKotipathiStrategy", () => {
 
     beforeEach(() => {
         strategy = new AdaKotipathiStrategy();
-        adaKotipathiResultScheet = {
+        resultSheet = {
             date: new Date("2025-01-27"),
             name: "Ada Kotipathi",
             qrIndexes: {
@@ -64,7 +64,7 @@ describe("adaKotipathiStrategy", () => {
                 ]
             }
         };
-        adaKotipathiQRCode = "ADA KOTIPATHI 2529 2025&01&27 2529129776598008 01 18 70 75 G 684656 www.dlb.lk";
+        qrCode = "ADA KOTIPATHI 2529 2025&01&27 2529129776598008 01 18 70 75 G 684656 www.dlb.lk";
         lotteryData = {
             barcode: "2529129776598008",
             drawNo: "2529",
@@ -74,7 +74,7 @@ describe("adaKotipathiStrategy", () => {
                 { category: "first", symboles: ["684656"] }
             ]
         };
-        qrTokens = Tokenizer.tokenizeStringBySpaces(adaKotipathiQRCode);
+        qrTokens = Tokenizer.tokenizeStringBySpaces(qrCode);
         lotteryResult = {
             totalWinMainPrice: 50000000,
             matchedCategoryCount: 1,
@@ -121,7 +121,7 @@ describe("adaKotipathiStrategy", () => {
 
     test("should parse the qr code and returns the LotteryDataEntity with parsed data", () => {
         // Action
-        const result = strategy.parseQRTokens(qrTokens, adaKotipathiResultScheet.qrIndexes);
+        const result = strategy.parseQRTokens(qrTokens, resultSheet.qrIndexes);
 
         // Assert
         expect(lotteryData).toEqual(result);
@@ -129,7 +129,7 @@ describe("adaKotipathiStrategy", () => {
 
     test("should give the correct results for the parsed data", () => {
         // Action
-        const result = strategy.checkTheResult(adaKotipathiResultScheet.results, lotteryData);
+        const result = strategy.checkTheResult(resultSheet.results, lotteryData);
 
         // Assert
         expect(result).toEqual(lotteryResult)

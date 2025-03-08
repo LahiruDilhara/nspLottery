@@ -154,7 +154,7 @@ export default class ResultRepository implements IResultRepository {
 
     private kaprukaResultScheet: ResultSheetEntity = {
         date: new Date("2025-01-29"),
-        name: "Jayodha",
+        name: "Kapruka",
         qrIndexes: {
             barCode: 3,
             drawNo: 1,
