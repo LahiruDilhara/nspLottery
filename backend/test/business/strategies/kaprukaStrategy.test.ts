@@ -7,7 +7,7 @@ import LotteryResultEntity from "../../../src/business/entities/LotteryResultEnt
 import KaprukaStrategy from "../../../src/business/strategies/kaprukaStrategy";
 
 
-describe("adaKotipathiStrategy", () => {
+describe("kaprukaStrategy", () => {
     let strategy: ILotteryStrategy;
     let resultSheet: ResultSheetEntity;
     let qrCode: string
