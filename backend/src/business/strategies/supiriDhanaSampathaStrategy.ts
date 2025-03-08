@@ -11,13 +11,6 @@ export default class SupiriDhanaSampathaStrategy extends ResultMatcher implement
         return "supiri dhana sampatha";
     }
 
-
-    formatDate(dateString: string): Date {
-        let [year, month, day] = dateString.split(".");
-        let formattedDate = `${year}-${month}-${day}`;
-        return new Date(formattedDate);
-    }
-
     parseQRTokens(tokens: string[], qrIndexes: QRIndexes): LotteryDataEntity {
         return {
             barcode: tokens[qrIndexes.barCode],
