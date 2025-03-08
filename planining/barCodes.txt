@@ -1,4 +1,5 @@
 look at the jayodhaStrategy.ts and this test file for it. you have to generate code to test each case as this. in jayodhaStrategy go from bottom to top of the main result check if conditions and write these test. as an example the next test is "should give the main win prize as 40 when one number match". look at the adaKotipathiStrategy.test.ts for references
+look at the dhanaNidhanayaStrategy.ts and this test file for it. you have to generate code to test each case as this. in dhanaNidhanayaStrategy go from bottom to top of the main result check if conditions and write these test. as an example the next test is "should give the main win prize as 40 when one number match". look at the adaKotipathiStrategy.test.ts for references. look the calculateMainPrize in the dhanaNidhanayaStrategy.ts and generate tests for each test case in that method.
 
 # ada sampatha (barcode 086003100387491, Draw No. 0310, Date 2025/02/02)
 # regex "^Ada\s+Sampatha\s+\d+\s+(\d{2}\.){2}\d{4}\s+\d{15}\s+[A-Z](\s+(\d{2,4})){3}"

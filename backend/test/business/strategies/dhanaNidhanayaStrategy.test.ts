@@ -1,13 +1,14 @@
 import { beforeEach, describe, test, expect, expectTypeOf } from "vitest";
+import AdaKotipathiStrategy from "../../../src/business/strategies/adaKotipathiStrategy";
 import ResultSheetEntity from "../../../src/business/entities/ResultSheetEntity";
 import LotteryDataEntity from "../../../src/business/entities/LotteryDataEntity";
 import Tokenizer from "../../../src/core/utils/tokenizer";
 import ILotteryStrategy from "../../../src/business/interfaces/ILotteryStrategy";
 import LotteryResultEntity from "../../../src/business/entities/LotteryResultEntity";
-import HadahanaStrategy from "../../../src/business/strategies/hadahanaStrategy";
+import DhanaNidhanayaStrategy from "../../../src/business/strategies/dhanaNidhanayaStrategy";
 
 
-describe("hadahanaStrategy", () => {
+describe("dhanaNidhanayaStrategy", () => {
     let strategy: ILotteryStrategy;
     let resultSheet: ResultSheetEntity;
     let qrCode: string
@@ -31,34 +32,34 @@ describe("hadahanaStrategy", () => {
     }
 
     beforeEach(() => {
-        strategy = new HadahanaStrategy();
+        strategy = new DhanaNidhanayaStrategy();
         resultSheet = {
             date: new Date("2025-01-31"),
-            name: "Hadahana",
+            name: "Dhana Nidhanaya",
             qrIndexes: {
-                barCode: 3,
-                drawNo: 1,
-                numbers: [5, 6, 7, 8],
-                symboles: [4],
-                tokensLength: 12,
+                barCode: 11,
+                drawNo: 2,
+                numbers: [4, 5, 6, 7],
+                symboles: [3],
+                tokensLength: 13,
                 specialSymboles: [
-                    { category: "first", indexes: [9] },
-                    { category: "second", indexes: [10] },
+                    { category: "first", indexes: [8] },
+                    { category: "second", indexes: [9] },
                 ]
             },
             results: {
-                numbers: ["21", "34", "36", "45"],
-                symboles: ["SAJ"],
+                numbers: ["17", "49", "70", "72"],
+                symboles: ["A"],
                 specialSymboles: [
-                    { category: "first", description: "regular", gift: "50000", method: "OneToOne", results: ["91738"] },
-                    { category: "second", description: "regular", gift: "40", method: "OneToOne", results: ["10"] },
+                    { category: "first", description: "regular", gift: "40", method: "OneToOne", results: ["J"] },
+                    { category: "second", description: "regular", gift: "100000", method: "OneToOne", results: ["69497"] },
                 ],
                 prizes: [
-                    3000000,
-                    1000000,
-                    25000,
+                    80000000,
+                    2000000,
+                    200000,
+                    6000,
                     2000,
-                    500,
                     200,
                     120,
                     40,
@@ -66,42 +67,42 @@ describe("hadahanaStrategy", () => {
                 ],
             }
         };
-        qrCode = "Handaha 1042    2025&01&31  085010420464898 SAJ 21  34  36  45  91738   10          http>&&r.nlb.lk&085010420464898SAJ213436459173810";
+        qrCode = "Dhana Nidhanaya 1763 A 17 49 70 72 J 69497 2025&01&31 084017630186876 https>&&r.nlb.lk&084017630186876A17497072J69497";
         lotteryData = {
-            barcode: "085010420464898",
-            drawNo: "1042",
-            symboles: ["SAJ"],
-            numbers: ["21", "34", "36", "45"],
+            barcode: "084017630186876",
+            drawNo: "1763",
+            symboles: ["A"],
+            numbers: ["17", "49", "70", "72"],
             specialSymboles: [
-                { category: "first", symboles: ["91738"] },
-                { category: "second", symboles: ["10"] }
+                { category: "first", symboles: ["J"] },
+                { category: "second", symboles: ["69497"] },
             ]
         };
         qrTokens = Tokenizer.tokenizeStringBySpaces(qrCode);
         lotteryResult = {
-            totalWinMainPrice: 3000000,
+            totalWinMainPrice: 80000000,
             matchedCategoryCount: 2,
             matchedMainNumbers: [
                 {
-                    symbole: "21",
+                    symbole: "17",
                     matched: true
                 },
                 {
-                    symbole: "34",
+                    symbole: "49",
                     matched: true
                 },
                 {
-                    symbole: "36",
+                    symbole: "70",
                     matched: true
                 },
                 {
-                    symbole: "45",
+                    symbole: "72",
                     matched: true
                 }
             ],
             matchedMainSymboles: [
                 {
-                    symbole: "SAJ",
+                    symbole: "A",
                     matched: true
                 }
             ],
@@ -111,10 +112,10 @@ describe("hadahanaStrategy", () => {
                     symboles: [
                         {
                             matched: true,
-                            symbole: "91738"
+                            symbole: "J"
                         }
                     ],
-                    gift: "50000",
+                    gift: "40",
                     matched: true
                 },
                 {
@@ -122,10 +123,10 @@ describe("hadahanaStrategy", () => {
                     symboles: [
                         {
                             matched: true,
-                            symbole: "10"
+                            symbole: "69497"
                         }
                     ],
-                    gift: "40",
+                    gift: "100000",
                     matched: true
                 }
             ]
@@ -151,30 +152,30 @@ describe("hadahanaStrategy", () => {
 
     test("should give the main win prize as 0 when no number nor symbole match", () => {
         // Arrange
-        const lotteryNumbers = ["22", "35", "37", "46"]
-        const symbole = ["HELLO"]
+        const lotteryNumbers = ["18", "50", "71", "73"]
+        const symbole = ["B"]
         const expectedValue = 0
         const resultNumbers = [
             {
-                symbole: "22",
+                symbole: "18",
                 matched: false
             },
             {
-                symbole: "35",
+                symbole: "50",
                 matched: false
             },
             {
-                symbole: "37",
+                symbole: "71",
                 matched: false
             },
             {
-                symbole: "46",
+                symbole: "73",
                 matched: false
             }
         ]
         const symboles = [
             {
-                symbole: "HELLO",
+                symbole: "B",
                 matched: false
             }
         ]
@@ -182,32 +183,32 @@ describe("hadahanaStrategy", () => {
         testWithResults(lotteryNumbers, symbole, expectedValue, resultNumbers, symboles)
     })
 
-    test("should give the main win prize as 40 when only symbole match", () => {
+    test("should give the main win prize as 40 when only the symbole match", () => {
         // Arrange
-        const lotteryNumbers = ["22", "35", "37", "46"]
-        const symbole = ["SAJ"]
+        const lotteryNumbers = ["18", "50", "71", "73"]
+        const symbole = ["A"]
         const expectedValue = 40
         const resultNumbers = [
             {
-                symbole: "22",
+                symbole: "18",
                 matched: false
             },
             {
-                symbole: "35",
+                symbole: "50",
                 matched: false
             },
             {
-                symbole: "37",
+                symbole: "71",
                 matched: false
             },
             {
-                symbole: "46",
+                symbole: "73",
                 matched: false
             }
         ]
         const symboles = [
             {
-                symbole: "SAJ",
+                symbole: "A",
                 matched: true
             }
         ]
@@ -217,30 +218,30 @@ describe("hadahanaStrategy", () => {
 
     test("should give the main win prize as 40 when one number match", () => {
         // Arrange
-        const lotteryNumbers = ["21", "35", "37", "46"]
-        const symbole = ["HELLO"]
+        const lotteryNumbers = ["17", "50", "71", "73"]
+        const symbole = ["B"]
         const expectedValue = 40
         const resultNumbers = [
             {
-                symbole: "21",
+                symbole: "17",
                 matched: true
             },
             {
-                symbole: "35",
+                symbole: "50",
                 matched: false
             },
             {
-                symbole: "37",
+                symbole: "71",
                 matched: false
             },
             {
-                symbole: "46",
+                symbole: "73",
                 matched: false
             }
         ]
         const symboles = [
             {
-                symbole: "HELLO",
+                symbole: "B",
                 matched: false
             }
         ]
@@ -250,30 +251,30 @@ describe("hadahanaStrategy", () => {
 
     test("should give the main win prize as 120 when one number and symbole match", () => {
         // Arrange
-        const lotteryNumbers = ["21", "35", "37", "46"]
-        const symbole = ["SAJ"]
+        const lotteryNumbers = ["17", "50", "71", "73"]
+        const symbole = ["A"]
         const expectedValue = 120
         const resultNumbers = [
             {
-                symbole: "21",
+                symbole: "17",
                 matched: true
             },
             {
-                symbole: "35",
+                symbole: "50",
                 matched: false
             },
             {
-                symbole: "37",
+                symbole: "71",
                 matched: false
             },
             {
-                symbole: "46",
+                symbole: "73",
                 matched: false
             }
         ]
         const symboles = [
             {
-                symbole: "SAJ",
+                symbole: "A",
                 matched: true
             }
         ]
@@ -283,30 +284,30 @@ describe("hadahanaStrategy", () => {
 
     test("should give the main win prize as 200 when two numbers match", () => {
         // Arrange
-        const lotteryNumbers = ["21", "34", "37", "46"]
-        const symbole = ["HELLO"]
+        const lotteryNumbers = ["17", "49", "71", "73"]
+        const symbole = ["B"]
         const expectedValue = 200
         const resultNumbers = [
             {
-                symbole: "21",
+                symbole: "17",
                 matched: true
             },
             {
-                symbole: "34",
+                symbole: "49",
                 matched: true
             },
             {
-                symbole: "37",
+                symbole: "71",
                 matched: false
             },
             {
-                symbole: "46",
+                symbole: "73",
                 matched: false
             }
         ]
         const symboles = [
             {
-                symbole: "HELLO",
+                symbole: "B",
                 matched: false
             }
         ]
@@ -314,98 +315,32 @@ describe("hadahanaStrategy", () => {
         testWithResults(lotteryNumbers, symbole, expectedValue, resultNumbers, symboles)
     })
 
-    test("should give the main win prize as 500 when two numbers and symbole match", () => {
+    test("should give the main win prize as 2000 when two numbers and symbole match", () => {
         // Arrange
-        const lotteryNumbers = ["21", "34", "37", "46"]
-        const symbole = ["SAJ"]
-        const expectedValue = 500
-        const resultNumbers = [
-            {
-                symbole: "21",
-                matched: true
-            },
-            {
-                symbole: "34",
-                matched: true
-            },
-            {
-                symbole: "37",
-                matched: false
-            },
-            {
-                symbole: "46",
-                matched: false
-            }
-        ]
-        const symboles = [
-            {
-                symbole: "SAJ",
-                matched: true
-            }
-        ]
-
-        testWithResults(lotteryNumbers, symbole, expectedValue, resultNumbers, symboles)
-    })
-
-    test("should give the main win prize as 2000 when three numbers match", () => {
-        // Arrange
-        const lotteryNumbers = ["21", "34", "36", "46"]
-        const symbole = ["HELLO"]
+        const lotteryNumbers = ["17", "49", "71", "73"]
+        const symbole = ["A"]
         const expectedValue = 2000
         const resultNumbers = [
             {
-                symbole: "21",
+                symbole: "17",
                 matched: true
             },
             {
-                symbole: "34",
+                symbole: "49",
                 matched: true
             },
             {
-                symbole: "36",
-                matched: true
+                symbole: "71",
+                matched: false
             },
             {
-                symbole: "46",
+                symbole: "73",
                 matched: false
             }
         ]
         const symboles = [
             {
-                symbole: "HELLO",
-                matched: false
-            }
-        ]
-
-        testWithResults(lotteryNumbers, symbole, expectedValue, resultNumbers, symboles)
-    })
-
-    test("should give the main win prize as 25000 when three numbers and symbole match", () => {
-        // Arrange
-        const lotteryNumbers = ["21", "34", "36", "46"]
-        const symbole = ["SAJ"]
-        const expectedValue = 25000
-        const resultNumbers = [
-            {
-                symbole: "21",
-                matched: true
-            },
-            {
-                symbole: "34",
-                matched: true
-            },
-            {
-                symbole: "36",
-                matched: true
-            },
-            {
-                symbole: "46",
-                matched: false
-            }
-        ]
-        const symboles = [
-            {
-                symbole: "SAJ",
+                symbole: "A",
                 matched: true
             }
         ]
@@ -413,32 +348,32 @@ describe("hadahanaStrategy", () => {
         testWithResults(lotteryNumbers, symbole, expectedValue, resultNumbers, symboles)
     })
 
-    test("should give the main win prize as 1000000 when four numbers match", () => {
+    test("should give the main win prize as 6000 when three numbers match", () => {
         // Arrange
-        const lotteryNumbers = ["21", "34", "36", "45"]
-        const symbole = ["HELLO"]
-        const expectedValue = 1000000
+        const lotteryNumbers = ["17", "49", "70", "73"]
+        const symbole = ["B"]
+        const expectedValue = 6000
         const resultNumbers = [
             {
-                symbole: "21",
+                symbole: "17",
                 matched: true
             },
             {
-                symbole: "34",
+                symbole: "49",
                 matched: true
             },
             {
-                symbole: "36",
+                symbole: "70",
                 matched: true
             },
             {
-                symbole: "45",
-                matched: true
+                symbole: "73",
+                matched: false
             }
         ]
         const symboles = [
             {
-                symbole: "HELLO",
+                symbole: "B",
                 matched: false
             }
         ]
@@ -446,32 +381,98 @@ describe("hadahanaStrategy", () => {
         testWithResults(lotteryNumbers, symbole, expectedValue, resultNumbers, symboles)
     })
 
-    test("should give the main win prize as 3000000 when four numbers and symbole match", () => {
+    test("should give the main win prize as 200000 when three numbers and symbole match", () => {
         // Arrange
-        const lotteryNumbers = ["21", "34", "36", "45"]
-        const symbole = ["SAJ"]
-        const expectedValue = 3000000
+        const lotteryNumbers = ["17", "49", "70", "73"]
+        const symbole = ["A"]
+        const expectedValue = 200000
         const resultNumbers = [
             {
-                symbole: "21",
+                symbole: "17",
                 matched: true
             },
             {
-                symbole: "34",
+                symbole: "49",
                 matched: true
             },
             {
-                symbole: "36",
+                symbole: "70",
                 matched: true
             },
             {
-                symbole: "45",
+                symbole: "73",
+                matched: false
+            }
+        ]
+        const symboles = [
+            {
+                symbole: "A",
+                matched: true
+            }
+        ]
+
+        testWithResults(lotteryNumbers, symbole, expectedValue, resultNumbers, symboles)
+    })
+
+    test("should give the main win prize as 2000000 when four numbers match", () => {
+        // Arrange
+        const lotteryNumbers = ["17", "49", "70", "72"]
+        const symbole = ["B"]
+        const expectedValue = 2000000
+        const resultNumbers = [
+            {
+                symbole: "17",
+                matched: true
+            },
+            {
+                symbole: "49",
+                matched: true
+            },
+            {
+                symbole: "70",
+                matched: true
+            },
+            {
+                symbole: "72",
                 matched: true
             }
         ]
         const symboles = [
             {
-                symbole: "SAJ",
+                symbole: "B",
+                matched: false
+            }
+        ]
+
+        testWithResults(lotteryNumbers, symbole, expectedValue, resultNumbers, symboles)
+    })
+
+    test("should give the main win prize as 80000000 when four numbers and symbole match", () => {
+        // Arrange
+        const lotteryNumbers = ["17", "49", "70", "72"]
+        const symbole = ["A"]
+        const expectedValue = 80000000
+        const resultNumbers = [
+            {
+                symbole: "17",
+                matched: true
+            },
+            {
+                symbole: "49",
+                matched: true
+            },
+            {
+                symbole: "70",
+                matched: true
+            },
+            {
+                symbole: "72",
+                matched: true
+            }
+        ]
+        const symboles = [
+            {
+                symbole: "A",
                 matched: true
             }
         ]
