@@ -1,4 +1,5 @@
-import { LotterySpecialSymbole, MatchSpecialSymbole, SpecialSymbole } from "../types/types";
+import { matches } from "lodash";
+import { LotterySpecialSymbole, MatchSpecialSymbole, NumberMatch, SpecialSymbole, SymboleMatch } from "../types/types";
 
 export default class ResultMatcher {
 
@@ -41,57 +42,137 @@ export default class ResultMatcher {
         return match;
     }
 
-    matchMainNumbers(wonNmbers: string[], lotteryNumbers: string[]): { number: string, matched: boolean }[] {
+    matchMainNumbers(wonNmbers: string[], lotteryNumbers: string[]): NumberMatch {
         let maches: { number: string, matched: boolean }[] = []
+        let total: number = 0;
+        let matchCount: number = 0;
+
         lotteryNumbers.forEach(lotteryNumber => {
             if (wonNmbers.find(resultNumber => resultNumber === lotteryNumber)) {
                 maches.push({ number: lotteryNumber, matched: true });
+                matchCount++;
             } else {
                 maches.push({ number: lotteryNumber, matched: false });
             }
+            total++;
         })
 
-        return maches;
+        return {
+            matchCount: matchCount,
+            totalCount: total,
+            matchStatus: maches
+        };
     }
 
-    matchSymboles(wonSymboles: string[], lotterySymboles: string[]): { symbole: string, matched: boolean }[] {
+    matchSymboles(wonSymboles: string[], lotterySymboles: string[]): SymboleMatch {
         let maches: { symbole: string, matched: boolean }[] = [];
+        let total: number = 0;
+        let matchCount: number = 0;
+
         lotterySymboles.forEach(lotterySymbole => {
             if (wonSymboles.find(resultSymbole => resultSymbole === lotterySymbole)) {
                 maches.push({ symbole: lotterySymbole, matched: true });
+                matchCount++;
             } else {
                 maches.push({ symbole: lotterySymbole, matched: false });
             }
+
+            total++;
         })
 
-        return maches;
+        return {
+            matchCount: matchCount,
+            totalCount: total,
+            matchStatus: maches
+        };
     }
 
-    matchMainNumbersInOrder(wonNumbers: string[], lotteryNumbers: string[]): { number: string, matched: boolean }[] {
+    matchMainNumbersInOrder(wonNumbers: string[], lotteryNumbers: string[]): NumberMatch {
         let maches: { number: string, matched: boolean }[] = [];
+        let total: number = 0;
+        let matchCount: number = 0;
 
         lotteryNumbers.forEach((lotteryNumber, index) => {
             if (wonNumbers[index] === lotteryNumber) {
                 maches.push({ number: lotteryNumber, matched: true });
+                matchCount++;
             }
             else {
                 maches.push({ number: lotteryNumber, matched: false });
             }
+
+            total++;
         })
 
-        return maches;
+        return {
+            matchCount: matchCount,
+            totalCount: total,
+            matchStatus: maches
+        }
     }
 
-    matchSymbolesInOrder(wonSymboles: string[], lotterySymboles: string[]): { symbole: string, matched: boolean }[] {
+    matchSymbolesInOrder(wonSymboles: string[], lotterySymboles: string[]): SymboleMatch {
         let maches: { symbole: string, matched: boolean }[] = [];
+        let total: number = 0;
+        let matchCount: number = 0;
+
         lotterySymboles.forEach((lotterySymbole, index) => {
             if (wonSymboles[index] === lotterySymbole) {
                 maches.push({ symbole: lotterySymbole, matched: true });
+                matchCount++;
             } else {
                 maches.push({ symbole: lotterySymbole, matched: false });
             }
+            total++;
         })
 
-        return maches;
+        return {
+            matchCount: matchCount,
+            totalCount: total,
+            matchStatus: maches
+        };
+    }
+
+    matchAllAnyOrderDescrete(wonSymboles: string[], lotterySymboles: string[]): SymboleMatch {
+        let matches: { symbole: string, matched: boolean }[] = [];
+        let total: number = 0;
+        let matchCount: number = 0;
+
+        lotterySymboles.forEach(lotterySymbole => {
+            if (wonSymboles.find(resultSymbole => resultSymbole === lotterySymbole)) {
+                matches.push({ symbole: lotterySymbole, matched: true });
+                matchCount++;
+            } else {
+                matches.push({ symbole: lotterySymbole, matched: false });
+            }
+            total++;
+        })
+
+        return {
+            matchCount: matchCount,
+            totalCount: total,
+            matchStatus: matches
+        }
+    }
+    matchAllInOrderDescrete(wonSymboles: string[], lotterySymboles: string[]): SymboleMatch {
+        let matches: { symbole: string, matched: boolean }[] = [];
+        let total: number = 0;
+        let matchCount: number = 0;
+
+        lotterySymboles.forEach((lotterySymbole, index) => {
+            if (wonSymboles[index] === lotterySymbole) {
+                matches.push({ symbole: lotterySymbole, matched: true });
+                matchCount++;
+            } else {
+                matches.push({ symbole: lotterySymbole, matched: false });
+            }
+            total++;
+        })
+
+        return {
+            matchCount: matchCount,
+            totalCount: total,
+            matchStatus: matches
+        }
     }
 }

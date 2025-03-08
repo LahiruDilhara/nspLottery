@@ -19,3 +19,15 @@ export type SpecialSymbole = { category: string, method: string, results: string
 export type LotterySpecialSymbole = { category: string, symboles: string[] }
 
 export type MatchSpecialSymbole = { category: string, symboles: { symbole: string, matched: boolean }[], gift: string, matched: boolean }
+
+export type SymboleMatch = {
+    matchCount: number;
+    totalCount: number;
+    matchStatus: { symbole: string, matched: boolean }[]
+}
+
+export type NumberMatch = {
+    matchCount: number;
+    totalCount: number;
+    matchStatus: { number: string, matched: boolean }[]
+}

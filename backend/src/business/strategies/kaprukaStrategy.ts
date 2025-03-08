@@ -26,19 +26,16 @@ export default class KaprukaStrategy extends ResultMatcher implements ILotterySt
     checkTheResult(result: Result, lotteryData: LotteryDataEntity): LotteryResultEntity {
 
         // get the maching main numbers which are formatted in correct order
-        let machedMainNumbers: { number: string, matched: boolean }[] = this.matchMainNumbers(result.numbers, lotteryData.numbers);
+        let machedMainNumbers = this.matchAllAnyOrderDescrete(result.numbers, lotteryData.numbers);
 
         // get the maching symboles which are formatted in correct order
-        let machedSymboles: { symbole: string, matched: boolean }[] = this.matchSymbolesInOrder(result.symboles, lotteryData.symboles);
+        let machedSymboles = this.matchAllAnyOrderDescrete(result.symboles, lotteryData.symboles);
 
         // get the maching special symboles which are formatted in correct order
         let machedSpecialSymboles: MatchSpecialSymbole[] = this.checkSpecialSymboles(result.specialSymboles, lotteryData.specialSymboles);
 
-        // calculate the maching main number count
-        let machingMainNumberCount = (machedMainNumbers.filter(mainNumber => mainNumber.matched === true)).length;
-
         // calculate the main prize for the ada kotipathi lottery
-        let totalWinMainPrize = this.calculateMainPrize(result.prizes, machingMainNumberCount, machedSymboles);
+        let totalWinMainPrize = this.calculateMainPrize(result.prizes, machedMainNumbers.matchCount, machedSymboles.matchStatus);
 
         // matched specialSymbolesCategoryCount
         let machedSpecialSymbolesCategoryCount = (machedSpecialSymboles.filter(matchedSpecialSymbole => matchedSpecialSymbole.matched === true)).length;
@@ -46,8 +43,8 @@ export default class KaprukaStrategy extends ResultMatcher implements ILotterySt
         return {
             totalWinMainPrice: totalWinMainPrize,
             matchedCategoryCount: machedSpecialSymbolesCategoryCount,
-            matchedMainNumbers: machedMainNumbers,
-            matchedMainSymboles: machedSymboles,
+            matchedMainNumbers: machedMainNumbers.matchStatus,
+            matchedMainSymboles: machedSymboles.matchStatus,
             matchedSpecialSymboles: machedSpecialSymboles,
         }
     }
