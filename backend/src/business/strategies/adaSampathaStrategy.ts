@@ -54,8 +54,7 @@ export default class AdaSampathaStrategy extends ResultMatcher implements ILotte
         else if (matchedMainNumbers[1].matched && matchedMainNumbers[0].matched) return prizes[2] + prizes[3];
         else if (matchedMainNumbers[1].matched) return prizes[2];
         else if (matchedMainNumbers[0].matched) return prizes[3];
-        else if (symboleMatched) return 80;
+        else if (symboleMatched) return prizes[4];
         else return 0
     }
-
 }
