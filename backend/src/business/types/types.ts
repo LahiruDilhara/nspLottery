@@ -26,8 +26,10 @@ export type SymboleMatch = {
     matchStatus: { symbole: string, matched: boolean }[]
 }
 
-export type NumberMatch = {
+export type SymboleMatchInDirection = {
     matchCount: number;
     totalCount: number;
-    matchStatus: { number: string, matched: boolean }[]
+    matchStatus: { symbole: string, matched: boolean }[];
+    leftMatchCount: number;
+    rightMatchCount: number;
 }

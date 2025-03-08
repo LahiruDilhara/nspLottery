@@ -1,6 +1,6 @@
 import { beforeEach, describe, test, expect, expectTypeOf } from "vitest";
 import ResultMatcher from "../../../src/business/strategies/ResultMatcher";
-import { LotterySpecialSymbole, MatchSpecialSymbole, SpecialSymbole } from "../../../src/business/types/types";
+import { LotterySpecialSymbole, MatchSpecialSymbole, SpecialSymbole, SymboleMatchInDirection } from "../../../src/business/types/types";
 
 describe("ResultMatcher", () => {
     let matcher: ResultMatcher;
@@ -46,6 +46,38 @@ describe("ResultMatcher", () => {
             expect(item.symbole).toBe(lotterySymboles[index])
             expect(item.matched).toBe(wonList[index])
         })
+    })
+
+
+    test("should match the given list of the lottery data in both directions continously", () => {
+        // Arrange
+        const wonSymboles: string[] = ["4", "w", "4", "11", "50", "60", "77", "84", "57", "95", "20"];
+        const lotterySymboles: string[] = ["4", "w", "4", "11", "51", "60", "74", "82", "57", "95", "20"];
+        const trueData: SymboleMatchInDirection = {
+            leftMatchCount: 4,
+            rightMatchCount: 3,
+            matchCount: 8,
+            totalCount: wonSymboles.length,
+            matchStatus: [
+                { symbole: "4", matched: true },
+                { symbole: "w", matched: true },
+                { symbole: "4", matched: true },
+                { symbole: "11", matched: true },
+                { symbole: "51", matched: false },
+                { symbole: "60", matched: true },
+                { symbole: "74", matched: false },
+                { symbole: "82", matched: false },
+                { symbole: "57", matched: true },
+                { symbole: "95", matched: true },
+                { symbole: "20", matched: true },
+            ]
+        }
+
+        // Action
+        const result = matcher.matchInDirectionContinious(wonSymboles, lotterySymboles);
+
+        // Assert
+        expect(result).toEqual(trueData)
     })
 
     test("should check the special symboles in one to one match method and give the result", () => {

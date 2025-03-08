@@ -1,4 +1,4 @@
-import { LotterySpecialSymbole, MatchSpecialSymbole, NumberMatch, SpecialSymbole, SymboleMatch } from "../types/types";
+import { LotterySpecialSymbole, MatchSpecialSymbole, SpecialSymbole, SymboleMatch, SymboleMatchInDirection } from "../types/types";
 
 export default class ResultMatcher {
 
@@ -44,6 +44,50 @@ export default class ResultMatcher {
             totalCount: total,
             matchStatus: matches
         }
+    }
+
+    matchInDirectionContinious(wonSymboles: string[], lotterySymboles: string[]): SymboleMatchInDirection {
+        let matches: { symbole: string, matched: boolean }[] = [];
+        let total: number = 0;
+        let matchCount: number = 0;
+        let leftMatchCount: number = 0;
+        let rightMatchCount: number = 0;
+        let leftMatched: boolean = true;
+        let rightMatched: boolean = true;
+
+        lotterySymboles.forEach((symbole, index) => {
+            total++;
+            if (symbole === wonSymboles[index]) {
+                matchCount++;
+                matches.push({ symbole: symbole, matched: true });
+            }
+            else {
+                matches.push({ symbole: symbole, matched: false });
+            }
+
+            if (symbole === wonSymboles[index] && leftMatched) {
+                leftMatchCount++;
+            }
+            else {
+                leftMatched = false
+            }
+            let rightEndIndex = lotterySymboles.length - 1 - index;
+            if (lotterySymboles[rightEndIndex] === wonSymboles[rightEndIndex] && rightMatched) {
+                rightMatchCount++;
+            }
+            else {
+                rightMatched = false;
+            }
+        })
+
+        return {
+            leftMatchCount: leftMatchCount,
+            rightMatchCount: rightMatchCount,
+            matchCount: matchCount,
+            matchStatus: matches,
+            totalCount: total
+        }
+
     }
 
     checkSpecialSymboles(wonSymboles: SpecialSymbole[], lotterySymboles: LotterySpecialSymbole[]): MatchSpecialSymbole[] {
