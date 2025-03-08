@@ -30,7 +30,7 @@ export default class SupiriDhanaSampathaStrategy extends ResultMatcher implement
 
     checkTheResult(result: Result, lotteryData: LotteryDataEntity): LotteryResultEntity {
         // get the maching main numbers which are formatted in correct order
-        let machedMainNumbers = this.matchAllInOrderDescrete(result.numbers, lotteryData.numbers);
+        let machedMainNumbers = this.matchInDirectionContinious(result.numbers, lotteryData.numbers);
 
         // get the maching symboles which are formatted in correct order
         let machedSymboles = this.matchAllInOrderDescrete(result.symboles, lotteryData.symboles);
@@ -42,7 +42,7 @@ export default class SupiriDhanaSampathaStrategy extends ResultMatcher implement
         let matchedInAnyOrder = this.checkAllExistInAnyOrder(result.numbers, lotteryData.numbers);
 
         // calculate the main prize for the ada kotipathi lottery
-        let totalWinMainPrize = this.calculateMainPrize(result.prizes, machedMainNumbers.matchStatus, machedSymboles.matchCount !== 0, matchedInAnyOrder);
+        let totalWinMainPrize = this.calculateMainPrize(result.prizes, machedMainNumbers.leftMatchCount, machedMainNumbers.rightMatchCount, machedSymboles.matchCount !== 0, matchedInAnyOrder);
 
         // matched specialSymbolesCategoryCount
         let machedSpecialSymbolesCategoryCount = (machedSpecialSymboles.filter(matchedSpecialSymbole => matchedSpecialSymbole.matched === true)).length;
@@ -57,9 +57,7 @@ export default class SupiriDhanaSampathaStrategy extends ResultMatcher implement
         }
     }
 
-    calculateMainPrize(prizes: number[], matchedMainNumbers: { symbole: string, matched: boolean }[], symboleMatched: boolean, existsInAnyOrder: boolean): number {
-        let startMatchCounter = this.matchedCountFromStart(matchedMainNumbers);
-        let endMatchCounter = this.matchedCountFromEnd(matchedMainNumbers);
+    calculateMainPrize(prizes: number[], startMatchCounter: number, endMatchCounter: number, symboleMatched: boolean, existsInAnyOrder: boolean): number {
 
         if (endMatchCounter === 6 && symboleMatched) return prizes[0];
         else if (endMatchCounter === 6) return prizes[1];
@@ -78,30 +76,6 @@ export default class SupiriDhanaSampathaStrategy extends ResultMatcher implement
 
         return 0
     }
-
-    matchedCountFromStart(matchedMainNumbers: { symbole: string, matched: boolean }[]): number {
-        let counter = 0;
-
-        for (let mN of matchedMainNumbers) {
-            if (!mN.matched) break;
-            counter++;
-        }
-
-        return counter;
-    }
-
-    matchedCountFromEnd(matchedMainNumbers: { symbole: string, matched: boolean }[]) {
-        let pointer = matchedMainNumbers.length - 1;
-        let counter = 0;
-
-        for (let i = pointer; i >= 0; i--) {
-            if (!matchedMainNumbers[i].matched) break;
-            counter++;
-        }
-
-        return counter;
-    }
-
 
     checkAllExistInAnyOrder(resultNumbers: string[], lotteryNumbers: string[]) {
         let copyLotteryNumber = [...lotteryNumbers];

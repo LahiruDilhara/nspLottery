@@ -41,7 +41,7 @@ export default class MahajanaStrategy extends ResultMatcher implements ILotteryS
 
     checkTheResult(result: Result, lotteryData: LotteryDataEntity): LotteryResultEntity {
         // get the maching main numbers which are formatted in correct order
-        let machedMainNumbers = this.matchAllInOrderDescrete(result.numbers, lotteryData.numbers);
+        let machedMainNumbers = this.matchInDirectionContinious(result.numbers, lotteryData.numbers);
 
         // get the maching symboles which are formatted in correct order
         let machedSymboles = this.matchAllInOrderDescrete(result.symboles, lotteryData.symboles);
@@ -50,7 +50,7 @@ export default class MahajanaStrategy extends ResultMatcher implements ILotteryS
         let machedSpecialSymboles: MatchSpecialSymbole[] = this.checkSpecialSymboles(result.specialSymboles, lotteryData.specialSymboles);
 
         // calculate the main prize for the ada kotipathi lottery
-        let totalWinMainPrize = this.calculateMainPrize(result.prizes, machedMainNumbers.matchStatus, machedSymboles.matchCount !== 0);
+        let totalWinMainPrize = this.calculateMainPrize(result.prizes, machedMainNumbers.leftMatchCount, machedMainNumbers.rightMatchCount, machedSymboles.matchCount !== 0);
 
         // matched specialSymbolesCategoryCount
         let machedSpecialSymbolesCategoryCount = (machedSpecialSymboles.filter(matchedSpecialSymbole => matchedSpecialSymbole.matched === true)).length;
@@ -65,10 +65,7 @@ export default class MahajanaStrategy extends ResultMatcher implements ILotteryS
         }
     }
 
-    calculateMainPrize(prizes: number[], matchedMainNumbers: { symbole: string, matched: boolean }[], symboleMatched: boolean): number {
-        let startMatchCounter = this.matchedCountFromStart(matchedMainNumbers);
-        let endMatchCounter = this.matchedCountFromEnd(matchedMainNumbers);
-
+    calculateMainPrize(prizes: number[], startMatchCounter: number, endMatchCounter: number, symboleMatched: boolean): number {
         if (endMatchCounter === 6 && symboleMatched) return prizes[0];
         else if (endMatchCounter === 6) return prizes[1];
         else if (endMatchCounter === 5) return prizes[2];
@@ -85,29 +82,4 @@ export default class MahajanaStrategy extends ResultMatcher implements ILotteryS
 
         return 0
     }
-
-    matchedCountFromStart(matchedMainNumbers: { symbole: string, matched: boolean }[]): number {
-        let counter = 0;
-
-        for (let mN of matchedMainNumbers) {
-            if (!mN.matched) break;
-            counter++;
-        }
-
-        return counter;
-    }
-
-    matchedCountFromEnd(matchedMainNumbers: { symbole: string, matched: boolean }[]) {
-        let pointer = matchedMainNumbers.length - 1;
-        let counter = 0;
-
-        for (let i = pointer; i >= 0; i--) {
-            if (!matchedMainNumbers[i].matched) break;
-            counter++;
-        }
-
-        return counter;
-    }
-
-
 }

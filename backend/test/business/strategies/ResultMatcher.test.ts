@@ -51,7 +51,7 @@ describe("ResultMatcher", () => {
 
     test("should match the given list of the lottery data in both directions continously", () => {
         // Arrange
-        const wonSymboles: string[] = ["4", "w", "4", "11", "50", "60", "77", "84", "57", "95", "20"];
+        const wonSymboles: string[] = ["4", "w", "4", "11", "74", "60", "51", "84", "57", "95", "20"];
         const lotterySymboles: string[] = ["4", "w", "4", "11", "51", "60", "74", "82", "57", "95", "20"];
         const trueData: SymboleMatchInDirection = {
             leftMatchCount: 4,
