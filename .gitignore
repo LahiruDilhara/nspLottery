@@ -3,3 +3,4 @@ planing/
 businessLogic/
 node_modules/
 dist/
+docker-compose.yaml
